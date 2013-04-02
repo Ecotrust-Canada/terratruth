@@ -1,0 +1,472 @@
+
+  LAYER # used for the print functionality 
+    NAME "user_shapes"
+    STATUS ON
+    GROUP Public
+    DATA "poly from referrals_referralshape using SRID=3005"
+
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "user_shapes"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Legal"
+      STYLE
+        COLOR 51 51 255
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END
+
+  LAYER
+    NAME "BC - Parks"
+    STATUS ON
+    GROUP Public
+    DATA "the_geom from bd_general_bc_parks using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Parks"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    LABELITEM "pa_name"
+    CLASS
+      NAME "Park"
+      STYLE
+        COLOR 0 100 0
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 200
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+  END
+
+  LAYER
+    NAME "BC - Landscape Units"
+    STATUS ON
+    GROUP Public
+    DATA "the_geom from bd_general_rmp_lu_svw using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Landscape Units"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    LABELITEM "lu_name"
+    CLASS
+      NAME "Unit Boundary"
+      STYLE
+        OUTLINECOLOR 0 200 200
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 200 200
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END 
+  END
+
+  LAYER
+    NAME "BC - First Nations Reserves"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_reserves_2005 using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - First Nations Reserves"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TEMPLATE foo
+    LABELITEM "ir_name"
+    CLASS
+      NAME "Reserve Boundary"
+      STYLE
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+  END
+
+  LAYER # OGMA legal, BC-wide
+    NAME "Old Growth Forest Management Areas (Legal)"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_bc_ogma_legal using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "Old Growth Forest Management Areas (Legal)"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Legal"
+      STYLE
+        COLOR 51 255 102
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END # OGMA legal, BC-wide
+
+  LAYER # OGMA Not legal, BC-wide
+    NAME "Old Growth Forest Management Areas (Not Legal)"
+    STATUS ON
+    GROUP Public
+    DATA "the_geom from bd_general_bc_ogma_not_legal using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "Old Growth Forest Management Areas (Not Legal)"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Not Legal"
+      STYLE
+        COLOR 51 153 102
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END # OGMA Not legal, BC-wide
+
+  LAYER
+    NAME "BC - Biogeoclimatic Ecosystem Classification"
+    STATUS ON
+    GROUP Public
+    DATA "the_geom from bd_general_bec using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Biogeoclimatic Ecosystem Classification"
+    END
+    TYPE polygon
+    UNITS DD
+    MAXSCALEDENOM 250000
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TEMPLATE foo
+    CLASSITEM "zone"
+    CLASS
+      EXPRESSION "BAFA"
+      NAME "BAFA"
+      STYLE
+        COLOR 227 227 227
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "CMA"
+      NAME "CMA"
+      STYLE
+        COLOR 227 227 227
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "IMA"
+      NAME "IMA"
+      STYLE
+        COLOR 227 227 227
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "SWB"
+      NAME "SWB"
+      STYLE
+        COLOR 163 209 171
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "BWBS"
+      NAME "BWBS"
+      STYLE
+        COLOR 171 232 255
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "SBPS"
+      NAME "SBPS"
+      STYLE
+        COLOR 54 222 252
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "SBS"
+      NAME "SBS"
+      STYLE
+        COLOR 46 140 189
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "MH"
+      NAME "MH"
+      STYLE
+        COLOR 166 153 255
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "ESSF"
+      NAME "ESSF"
+      STYLE
+        COLOR 158 51 212
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "MS"
+      NAME "MS"
+      STYLE
+        COLOR 255 71 163
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "BG"
+      NAME "BG"
+      STYLE
+        COLOR 255 0 0
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "PP"
+      NAME "PP"
+      STYLE
+        COLOR 222 125 0
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "IDF"
+      NAME "IDF"
+      STYLE
+        COLOR 255 207 0
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "CDF"
+      NAME "CDF"
+      STYLE
+        COLOR 255 255 0
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "ICH"
+      NAME "ICH"
+      STYLE
+        COLOR 133 163 3
+        ANTIALIAS TRUE
+      END
+    END
+    CLASS
+      EXPRESSION "CWH"
+      NAME "CWH"
+      STYLE
+        COLOR 33 133 0
+        ANTIALIAS TRUE
+      END
+    END
+  END 
+
+  LAYER
+    NAME "BC - Ground Water Well Capture Zones"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_gw_well_capture_zone using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Ground Water Well Capture Zones"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Capture Zone"
+      STYLE
+        COLOR 153 255 255
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END # BC - Ground Water Well Capture Zones
+
+  LAYER
+    NAME "BC - Ground Water Aquifers (Vulnerability)"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_gw_aquifer using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Ground Water Aquifers (Vulnerability)"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    LABELITEM "vulnrablty"
+    CLASSITEM "vulnrablty"
+    CLASS
+      EXPRESSION "High"
+      NAME "High"
+      STYLE
+        COLOR 102 255 255
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+    CLASS
+      EXPRESSION "Moderate"
+      NAME "Moderate"
+      STYLE
+        COLOR 102 204 255
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+    CLASS
+      EXPRESSION "Low"
+      NAME "Low"
+      STYLE
+        COLOR 102 153 255
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+  END # BC - Ground Water Aquifers (Vulnerability)
+
+  LAYER
+    NAME "BC - Ground Water Wells"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_gw_well using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Ground Water Wells"
+    END
+    TYPE point
+    UNITS DD
+    MAXSCALEDENOM 100000
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TEMPLATE foo
+    CLASS
+      NAME "Ground Water Well"
+      STYLE
+        SYMBOL "circle"
+        SIZE 6
+        COLOR 0 0 255
+      END
+    END
+  END # BC - Ground Water Wells
+

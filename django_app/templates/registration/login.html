@@ -1,0 +1,46 @@
+{% extends "base_site.html" %}
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="/media/css/login.css" />{% endblock %}
+{% load i18n %}
+
+{% block title %} Terratruth {% endblock %}
+{% block bodyclass %}login{% endblock %} {# use special login body class #}
+
+{% block content %}
+{% if form.errors %}
+    {{ form.non_field_errors }}
+{% endif %}
+    <div align='center' style='margin-top: 60px'>
+{% if form.errors %}
+<p class="error">{% trans "Please correct the errors below:" %}</p>
+{% endif %}
+    <div id="login-main">
+	  <form method="post" action="{% if next %}?next={{ next }}{% endif %}" id="login-form">{# csrf_token #}	
+	    <div class="form-row">
+	        {% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span><br/>{% endif %}
+	        <label for="id_username">Username:</label>
+	        {{ form.username }}	         
+	    </div>
+	    <div class="form-row">
+	        {% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span><br/>{% endif %}	        
+	        <label for="id_password">Password:</label>
+	        {{ form.password }}	        
+	    </div>
+	    <div class="submit-row">
+	        <input type="submit" value="Log in" />
+	        &nbsp;<small><a href="{% url auth_password_reset %}">Forgot your password?</a></small>
+	    </div>	
+	  </form>
+	</div>
+	<div>
+	</p>
+	<br/>
+	<small><a href="/accounts/register/">{% trans "Register for an account" %}</a></small>
+	</div>
+	<div>
+	</div>
+	<script type="text/javascript">
+	document.getElementById('id_username').focus()
+	</script>
+	</div>
+	</center>
+{% endblock %}

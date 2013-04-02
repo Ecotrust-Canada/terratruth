@@ -1,0 +1,74 @@
+Test Cases
+
+yyy
+Using an external system, request a public WMS image using amndss.cgi
+Expected Outcome: Pass
+Reason: amndss.cgi is accessible by the public and provides access to public WMS map layers.
+Action: Browse to 
+https://amn-dev.ecotrust.ca/cgi-bin/amndss.cgi?LAYERS=bc_reserves&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,45,-118.125,50.625&WIDTH=256&HEIGHT=256
+Expected Result: Map tile with dots representing AMN users
+
+yyy
+Using an external system, try to request a private WMS image through django while not logged in
+Expected Outcome: Fail
+Reason: amndss-private.cgi is in the cgi-bin/private folder and apache is configured to only allow access to it from the localhost.
+https://amn-dev.ecotrust.ca/wms_layers/private/?LAYERS=Habitat%20Potential&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,49.21875,-122.34375,50.625&WIDTH=256&HEIGHT=256
+Expected Result: 500 error, you are not logged in.
+
+xxx
+Using an external system, try to request a private image through django using the system ip address instead of the amn-dev hostname and using 
+
+http instead of https
+http://96.49.143.142/cgi-bin/amndss.cgi?LAYERS=bc_reserves&TRANSPARENT=true&FORMAT=image/gif&SRS=EPSG:4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%25252Fvnd.ogc.se_inimage&BBOX=-123.75,45,-118.125,50.625&WIDTH=256&HEIGHT=256
+Reason: cgi access isn't allowed in this way on anything but amn-dev.ecotrust.org
+Expected Result: 500 error, not allowed
+
+yyy
+Using an external system, try to request a private WMS image you have access to while logged in
+Expected Outcome: Pass
+Reason: amndss-private.cgi is in the cgi-bin/private folder and apache is configured to only allow access to it from the localhost.
+https://amn-dev.ecotrust.ca/wms_layers/private/?LAYERS=Habitat%20Potential&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,49.21875,-122.34375,50.625&WIDTH=256&HEIGHT=256
+Expected Result: An image
+
+yyy
+Using an external system, try to request a private WMS image through the Django interface where you don.t have permission to access any of the 
+layers in your request
+Expected Outcome: Fail
+Reason: amndss-private.cgi is in the cgi-bin/private folder and apache is configured to only allow access to it from the localhost.
+Setup: Make sure you are logged in and not in the user groups that owns they layers you.re requesting.
+http://amn.ecotrust.ca/amndss-django/wms_layers/private/?LAYERS=LNLUP&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.22265625,50.625,-123.046875,50.80078125&WIDTH=256&HEIGHT=256
+Expected Result: 500 error, at least one of the layers you.re requesting either doesn.t exist, or you don.t have the proper permissions to access it.
+
+yyy
+Using an external system, try to request a private WMS image through the Django interface where you have permission to access some but not all of the layers in your request
+Expected Outcome: Fail
+Reason: amndss-private.cgi is in the cgi-bin/private folder and apache is configured to only allow access to it from the localhost.
+Setup: Make sure you are logged in and trying to access at least one layer that is owned by a user group that you.re not in.
+https://amn-dev.ecotrust.ca/wms_layers/private/?LAYERS=Habitat Potential,Watersheds&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,49.21875,-122.34375,50.625&WIDTH=256&HEIGHT=256
+Expected Result: 500 error, you don.t have permission to access a layer named _____, if it even exists.
+
+yyy
+Using an external system, try to request a private WMS layer using amndss.cgi
+Reason: amndss.cgi is accessible by the public but in running mapserver it provides the public mapfile which contains no private map layers.
+https://amn-dev.ecotrust.ca/cgi-bin/amndss.cgi?LAYERS=Habitat%20Potential,Old%20Growth%20Management%20Area&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,50.625,-123.046875,51.328125&WIDTH=256&HEIGHT=256
+Expected Outcome: Fail
+Expected Result: Image containing mapserver error, .Invalid layers given in the LAYERS parameter.
+
+yyy
+Using an external system, try to access mapserv CGI directly and specify your own mapfile
+Expected Outcome: Fail
+Reason: mapserv cgi is stored in the private folder of the cgi-bin directory so it.s not accessible except from the local machine.
+https://amn-dev.ecotrust.ca/cgi-bin/private/mapserv&LAYERS=Habitat%20Potential,Old%20Growth%20Management%20Area&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,50.625,-123.046875,51.328125&WIDTH=256&HEIGHT=256
+Expected Result: 403 Forbidden . .You don.t have permission.. or something along those lines
+
+yyy
+Using an external system, try to specify the private mapfile in your map request using the public interface (override map get variable)
+Expected Outcome: Fail
+https://amn-dev.ecotrust.ca/cgi-bin/amndss.cgi?map=/usr/local/apps/amndss/mapserver/amndss-private.map&LAYERS=Habitat%20Potential,Old%20Growth%20Management%20Area&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,50.625,-123.046875,51.328125&WIDTH=256&HEIGHT=256
+Reason: It is possible to provide the mapfile to use in your WMS request using the .map. variable, however the cgi.s both append their own 
+
+mapfiles to use and the user-supplied one that then follows is ignored.
+Expected Result: the public mapfile is used anyway and you get an error because the private layer you specified is not defined in that file.
+
+xxx
+Map layer legend image request

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href="{% block stylesheet %}/media/css/base.css{% endblock %}" />
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}/django-media/css/rtl.css{% endblock %}" />{% endif %}
+{% block extrastyle %}{% endblock %}
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Container -->
+<div id="container">
+
+    {% if not is_popup %}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        {% block branding %}{% endblock %}
+        </div>
+        <div id="user-tools">
+        {% if user.is_authenticated %}
+          {% trans 'Welcome,' %} <strong>{% firstof user.first_name user.username %}</strong>. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  {% block userlinks %}
+	  <a href="/accounts/password_change/">{% trans 'Change password' %}</a> | 
+	  <a href="/accounts/logout/">{% trans 'Logout' %}</a>
+	  {% endblock %}
+        {% else %}
+          <a href="/accounts/login/">{% trans "Login" %}</a> |
+          <a href="/accounts/register/">{% trans "Register" %}</a>        
+        {% endif %}
+        </div>
+        {% block nav-global %}{% endblock %}
+        
+    </div>
+    <!-- END Header -->
+    {% block breadcrumbs %}<div class="breadcrumbs"><a href="/">{% trans 'Home' %}</a>{% if title %} &rsaquo; {{ title }}{% endif %}</div>{% endblock %}
+    {% endif %}
+
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}<li>{{ message }}</li>{% endfor %}</ul>
+        {% endif %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+ 
+    {% block footer %}
+        <div id="footer">
+        <p>This site is facilitated and maintained by Ecotrust Canada.
+        <br>Copyright © 1998-<SCRIPT>
+            var year=new Date();
+            year=year.getYear();
+            if (year<1900) year+=1900;
+            document.write(year);
+            </SCRIPT> - <a href="http://www.nativemaps.org/" target="_blank">Aboriginal Mapping Network</a> & <a href="http://www.ecotrust.ca/" target="_blank">Ecotrust Canada</a>.
+        <br><br>Open Source Software / GNU General Public License:<br><br></br><a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html" target="_blank"><img src="https://www.gnu.org/graphics/gplv3-88x31.png" alt="[Small GPLv3 logo]"></a>
+        </p>
+        </div>
+    {% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>

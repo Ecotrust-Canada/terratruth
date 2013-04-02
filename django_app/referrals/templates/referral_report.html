@@ -1,0 +1,131 @@
+<html>
+    <head>
+      <title>{% block title %}Terratruth Decision Support System - Proposed Land Use Activity Report{% endblock %}</title>
+      <link rel="stylesheet" type="text/css" href="/media/css/report.css" />
+    <head>
+    <body>
+        <center>
+            <div id='amndss-report' style='margin-left:30px; margin-right:30px; margin-top:30px; text-align:left'>
+                <h1>TERRATRUTH DECISION SUPPORT SYSTEM - PROPOSED LAND USE ACTIVITY REPORT</h1>
+                <i>* Caution: This report may contain sensitive information. Please use discretion when sharing, storing and disposing of this information.</i>
+                <br/><br/>
+                <table style='margin-left:30px; width:90%'>
+                    <tr>
+                        <td style='padding-right:8px; font-weight:bold'>Report Type:</td><td>{{ doc.description }}</td><td></td>
+                        <td style='padding-right:8px; font-weight:bold'>Date:</td><td>{{ doc.date_added }}</td>
+                    </tr>
+                    <tr>
+                        <td style='padding-right:8px; font-weight:bold'>Report run by:</td><td>{{ user.first_name }} {{ user.last_name }}, {{ user.email }}</td><td></td>
+                        <td style='padding-right:8px; font-weight:bold'>Shape ID(s):</td><td>{{ doc.ids }}</td>
+                    </tr>
+                </table>
+
+                {% if doc.report.info_attributes.0.record_values %}
+                <h2>PROPONENT INFORMATION</h2>
+                <table style='margin-left:30px; width:90%'>
+                    {% for ref_info in doc.report.info_attributes %}
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Date of Submission:</td>
+                            <td>{{ ref_info.record_values.2 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>First Nations Contact Person(s):</td>
+                            <td>{{ ref_info.record_values.3 }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Date Requested By:</td>
+                            <td>{{ ref_info.record_values.6 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>Response is Requested By:</td>
+                            <td>{{ ref_info.record_values.7 }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Proponent Organization:</td>
+                            <td>{{ ref_info.record_values.9 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>Schedule/Term of Proposal:</td>
+                            <td>{{ ref_info.record_values.15 }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Proponent Contact(s):</td>
+                            <td>{{ ref_info.record_values.27 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>Authorization or Decision to be made:</td>
+                            <td>{{ ref_info.record_values.8 }}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Location:</td>
+                            <td>{{ ref_info.record_values.5 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>BCGS (1:20,000) Mapsheet:</td>
+                            <td>{{ ref_info.record_values.11 }}{{ ref_info.record_values.12 }}.{{ ref_info.record_values.13 }}</td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Status</td>
+                            <td>{{ ref_info.record_values.30 }}</td><td></td>
+                            <td style='padding-right:8px; font-weight:bold'>Shape ID</td>
+                            <td>{{ ref_info.record_values.1 }}</td>
+                        </tr>
+                </table>
+                <table style='margin-left:30px; width:90%'>
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Proposal:</td>
+                            <td>{{ ref_info.record_values.4 }}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Background/Context:</td>
+                            <td>{{ ref_info.record_values.10 }}</td></tr>
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Legal Description:</td>
+                            <td>{{ ref_info.record_values.14 }}</td>
+                        </tr>
+                        <tr>
+                            <td style='padding-right:8px; font-weight:bold'>Other Information:</td>
+                            <td>{{ ref_info.record_values.16 }}</td>
+                        </tr>
+                            <tr><td style='padding-right:8px; font-weight:bold'>Related Decisions to be made:</td>
+                            <td>{{ ref_info.record_values.17 }}</td>
+                        </tr>
+                </table>
+                <table style='margin-left:30px; width:90%'>
+                        <tr><td style='padding-right:8px; font-weight:bold'>Other Known Decision(s)</td>
+                        <td>
+                            <table>
+                                <tr><td>Ministry of Environment (MOE):</td><td>{{ ref_info.record_values.18 }}</td></tr>
+                                <tr><td>Ministry of Energy, Mines and Petroleum Resources:</td><td>{{ ref_info.record_values.19 }}</td></tr>
+                                <tr><td>Integrated Land Mgmt Bureau (ILMB):</td><td>{{ ref_info.record_values.20 }}</td></tr>
+                                <tr><td>Ministry of Agriculture & Lands (MAL):</td><td>{{ ref_info.record_values.21 }}</td></tr>
+                                <tr><td>Ministry of Transportation & Infrastructure (MOT):</td><td>{{ ref_info.record_values.22 }}</td></tr>
+                                <tr><td>Ministry of Tourism, Culture, and the Arts (MTCA):</td><td>{{ ref_info.record_values.23 }}</td></tr>
+                                <tr><td>Ministry of Forest and Range (MOFR):</td><td>{{ ref_info.record_values.24 }}</td></tr>
+                                <tr><td>Ministry of Community Development (MCD):</td><td>{{ ref_info.record_values.25 }}</td></tr>
+                                <tr><td>Other:</td><td>{{ ref_info.record_values.26 }}</td></tr>
+                            </table>
+                        </td></tr>
+                    {% endfor %}
+                </table>
+                {% endif %}
+
+                <h2>LAND USE ACTIVITY SUMMARY</h2>
+
+                <h3>How many features does the Land Use Activity Area intersect?</h3>
+
+                <table style='margin-left:30px; width:90%'>
+                    <tr style='border-bottom: 1px solid'><th align='left'>LAYER</th><th style='text-align:right'>NUMBER OF FEATURES</th></tr>
+                    {% for name, value in doc.report.general.reportIntersectionSums.items %}
+                        <tr><td style='padding-right: 30px'>{{ name }}</td><td align='right'>{{ value }}</td></tr>
+                    {% endfor %}
+                </table>
+
+                {% for question, answer in doc.report.questions.items %}
+                    <h3>{{ answer.title }}</h3>
+                    <table style='margin-left:30px; width:90%'>
+                        <tr><th style='padding-right:30px; text-align:left'>{{ answer.header1 }}</th><th style='text-align:right'>{{ answer.header2 }}</th></tr>
+                        {% for field, value in answer.q.items %}
+                            <tr><td>{{ field }}</td><td align='right'>{{ value }}</td></tr>
+                        {% endfor %}
+                    </table>
+                {% endfor %}
+            </div>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,6 @@
+The public mapfile 'ce_atlas.map' is accesible through ce_atlas.cgi. ce_atlas.cgi 
+should be copied to a cgi directory defined by your web server.  
+For apache linux this may be under /var/www/cgi-bin or /usr/share/cgi-bin.
+
+Once copied, edit ce_atlas.cgi and set the correct path back to the public: 
+MAPSERVER_HOME=your_django_app_dir/ce_atlas/mapserver/ce_atlas.map

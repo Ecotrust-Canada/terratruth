@@ -1,0 +1,71 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<p>{% trans "User profile for" %} {{ user.first_name }} {{ user.last_name }}:</p>
+<table >
+    <tr>
+    <th align="left">{% trans "Username" %}</th>
+      <td>{{profile.user.username}} </td>
+    </tr>
+
+    <tr>
+    <th align="left">{% trans "First Name" %}</th>
+      <td>{{profile.user.first_name}} </td>
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "Last Name" %}</th>
+      <td>{{profile.user.last_name}} </td>
+    </tr>    
+
+    <tr>
+    <th align="left">{% trans "Email" %}</th>
+      <td>{{profile.email}} </td>
+    </tr>
+        
+    <tr>
+    <th align="left">{% trans "Address" %}</th>
+      <td>{{profile.address}} </td>
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "City or town" %}</th>
+      <td>{{profile.city}} </td>
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "Province or state" %}</th>
+      <td>{{profile.state}} </td>
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "Postal Code" %}</th>
+      <td>{{profile.zip}} </td>
+    </tr>
+
+    <tr>
+    <th align="left">{% trans "Public Profile?" %}</th>
+      <td>
+		{% if profile.is_public %}
+    		Yes
+        {% else %}
+            No
+		{% endif %}
+      </td>
+    </tr>
+    
+     <th align="left">{% trans "Group" %}</th>
+      <td>{{profile.organization}} </td>
+    </tr>
+    </table>
+<br>
+{# Only provide links if user is viewing their own profile #}
+{% ifequal user.username profile.user.username %}
+    {% url amndss.profiles as the_url %}
+    {% url amndss.profiles as url_profiles %}
+    {% url amndss.accounts as url_accounts %}
+    <p><a href='../edit'>{% trans "Edit your user profile." %}</a></p>
+{% endifequal %}
+{% endblock %}

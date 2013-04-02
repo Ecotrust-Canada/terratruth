@@ -1,0 +1,279 @@
+
+#loading-mask{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:20000;
+    background-color:white;
+}
+
+#loading{
+    position:absolute;
+    left:45%;
+    top:40%;
+    padding:2px;
+    z-index:20001;
+    height:auto;
+}
+
+#loading img {
+    margin-bottom:5px;
+}
+
+#loading .loading-indicator{
+    /* #background:white; */
+    color:#555;
+    font:bold 13px tahoma,arial,helvetica;
+    padding:10px;
+    margin:0;
+    text-align:center;
+    height:auto;
+}
+
+#loading .loading-indicators{
+    color:#555;
+    font:bold 16px tahoma,arial,helvetica;
+    padding:10px;
+    margin:0;
+    text-align:center;
+    height:auto;
+}
+
+#tools2 {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width: 800px;
+  height: 50px;
+  border: 1px solid black;
+}
+#map2 {
+  position:absolute;
+  top:50px;
+  left:0px;
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+}
+#info2 {
+  position:absolute;
+  top:650px;
+  left:0px;
+  width: 800px;
+  height: 100px;
+  border: 1px solid black;
+  overflow: scroll;
+}
+
+.helpIcon {
+    background-image:url("/media/images/help_orig.png") !important;
+}
+
+.olControlOverviewMapElement {
+    padding: 5px 5px 5px 5px;
+    background-color: #3F4D61;
+    -moz-border-radius: 0 0 0 0;
+}
+
+.olControlEditingToolbar  {
+  float:left;
+  right: 0px;
+  /* #height: 30px; */
+  width: 140px!important;
+}    
+.olControlEditingToolbar .olControlHoverItemActive { 
+  background-image: url("/media/images/amn_query_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlHoverItemInactive { 
+  background-image: url("/media/images/amn_query_off.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlSelectFeatureItemActive { 
+  background-image: url("/media/images/select_feature_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlSelectFeatureItemInactive { 
+  background-image: url("/media/images/select_feature_off.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlModifyFeatureItemActive { 
+  background-image: url("/media/images/move_vertex_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlModifyFeatureItemInactive { 
+  background-image: url("/media/images/move_vertex_off.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlDragFeatureItemActive { 
+  background-image: url("/media/images/move_feature_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlDragFeatureItemInactive { 
+  background-image: url("/media/images/move_feature_off.png");
+  background-repeat: no-repeat;
+}
+
+.olControlEditingToolbar .olControlZoomBoxItemActive { 
+  background-image: url("/media/images/amn_zoomin_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlZoomBoxItemInactive { 
+  background-image: url("/media/images/amn_zoomin_off.png");
+  background-repeat: no-repeat;
+}
+
+.olControlEditingToolbar .olControlZoomBoxOutItemActive { 
+  background-image: url("/media/images/amn_zoomout_on.png");
+  background-repeat: no-repeat;
+}
+.olControlEditingToolbar .olControlZoomBoxOutItemInactive { 
+  background-image: url("/media/images/amn_zoomout_off.png");
+  background-repeat: no-repeat;
+}
+
+div.olControlMousePosition {
+    background-color: #FFFFCC;
+    border: 1px solid #333333;
+    color: black;  
+    font-family: tahoma,arial,verdana;
+    font-size: 11px;
+    padding: 2px; 
+    right: 3px;
+    bottom: 3px;
+}
+
+.olControlScale {
+    background-color: #FFFFCC;
+    border: 1px solid #333333;
+    color: black;  
+    font-family: tahoma,arial,helvetica;
+    padding: 2px;
+    font-size: 11px;
+    bottom: 37px;  
+    left: 3px;
+}
+
+.olControlScaleLine {
+    background-color: #FFFFCC;
+    border: 1px solid #333333;
+    color: black;
+    font-family: tahoma,arial,helvetica;
+    padding: 2px;
+    font-size: 10px; 
+    left: 3px;
+    bottom: 3px;  
+}
+
+.olControlScaleLineTop {
+   border: solid 2px black;
+   border-top: none;
+}
+
+/*Override accordion header style, negate the 16px image on left*/
+.x-accordion-hd {
+    font-weight: bold;
+}
+.x-panel-inline-icon {
+    width: 0px;
+}
+
+/*Override active tab style*/
+.x-tab-strip-active span.x-tab-strip-text {
+	font-weight: normal;
+}
+
+#basic-tools {
+    border-top: 3px solid #222222;
+    border-bottom: 3px solid #222222;
+}
+
+#reference-panel {
+    border-top: 3px solid #222222;	
+}
+    
+/*Override with lighter background image*/
+#basic-tools .x-panel-header{
+    background-image: url(/webmap/ext/resources/images/slate/panel/light-hd.gif);
+}
+
+.sub-sub-content-panel .x-panel-header {
+    background-color:#DDDDDD;
+    color: #777777;
+    background-image: none;
+}
+
+.x-toolbar {
+    margin-bottom: 4px;
+}
+
+.form-label {
+    font-size:12px; 
+    font-family:tahoma,arial;
+    padding:3px;
+}
+
+.form-button {
+    font-size:12px; 
+    font-family:tahoma,arial;
+    padding:2px;
+}
+
+#map {
+   cursor:crosshair;
+}
+
+#rectifymap {
+   cursor:crosshair;
+}
+
+#rectifyimage {
+   cursor:crosshair;
+}
+
+.legend-image {
+   display: block;
+}
+
+.x-tree-node-icon {
+   display: none;
+}
+
+.legend-title {
+   font-size:16px; 
+   font-family: georgia, serif;
+   margin:5px;
+   border-bottom: 1px solid darkgrey;
+   white-space: nowrap;   
+}
+
+.cf-wms-image {
+   padding: 0 0 0 30px;
+}
+
+.x-tree-node-indent {
+   visibility: hidden;
+}
+
+.x-tree-elbow {
+   display: none;
+}
+
+.x-tree-elbow-end {
+   display: none;
+}
+
+.layer_name_header {
+   font-size: 11px; 
+   font-family: arial, sans-serif;
+   font-weight: bold;
+   margin: 5px;
+   padding: 5px 0 0 0;
+   white-space: nowrap;   
+}
+
+.cf-wms-disable-checkbox input {
+   display: none;
+}

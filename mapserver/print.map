@@ -1,0 +1,30 @@
+
+  LAYER # used for the print functionality 
+    NAME "user_shapes"
+    STATUS ON
+    GROUP Public
+    DATA "poly from referrals_referralshape using SRID=3005"
+
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "user_shapes"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Legal"
+      STYLE
+        COLOR 51 51 255
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END
+

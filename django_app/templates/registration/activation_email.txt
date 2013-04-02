@@ -1,0 +1,24 @@
+{% load humanize %}
+
+Your registration for the AMN decision support system has been approved. This new account will provide you limited access to data and functionality.
+
+To activate your account, click the link below or copy and paste it into your web browser's address bar:
+
+{{ host }}/accounts/activate/{{ activation_key }}/
+
+Username: {{ username }}
+Password: {{ password }}
+
+To attain additional access to information and tools for the Lilwat or Haida first nations please contact the administrator for each group.  Access will be limited and strictly enforced.
+
+Haida First Nation
+123 456th St.
+Haida Gwaii, BC
+123-456-7890
+person_in_charge@haidanation.ca
+ 
+Lil'wat First Nation
+12 85 St.
+Mount Currie, BC
+543-456-4321
+person_in_charge@lilwat.ca

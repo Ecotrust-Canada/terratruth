@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{{ LANGUAGE_CODE }}" xml:lang="{{ LANGUAGE_CODE }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<link rel="stylesheet" type="text/css" href="/media/css/base.css" />
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="/media/css/rtl.css" />{% endif %}
+{% block extrastyle %}{% endblock %}
+{% block extrahead %}{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}" onLoad="{% block bodyonload %}{% endblock %}">
+
+<!-- Container -->
+<div id="container">
+
+    <div id="header">
+        <div id="branding">
+        {% block branding %}{% endblock %}
+        </div>
+
+        <div id="user-tools">
+        {% block userlinks %}        
+        {% if user.is_authenticated %}
+	        <a href="{% url django.contrib.auth.views.password_change %}">{% trans 'Change password' %}</a>
+	        &nbsp;|&nbsp; <a href="/accounts/logout">{% trans 'Log out' %}</a>
+        {% else %}
+	        <a href="/accounts/login/">{% trans "Login" %}</a> |
+	        <a href="/accounts/register/">{% trans "Register" %}</a>        
+        {% endif %}        
+        {% endblock %}
+        </div>               
+    </div>
+    
+    {% block breadcrumbs %}
+        <div class="breadcrumbs"><a href="/">{% trans 'Home' %}</a>
+        {% if title %} &rsaquo; {{ title|escape }}{% endif %}  
+        </div>
+    {% endblock %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colSM{% endblock %}">
+        {% block pretitle %}{% endblock %}
+        <h1>{% block content_header %}{% endblock %}</h1>
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>

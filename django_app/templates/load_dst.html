@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Terratruth Decision Support System</title>
+    <link rel="stylesheet" href="/webmap/ext/resources/css/ext-all.css" type="text/css" />
+    <link rel="stylesheet" href="/webmap/ext/resources/css/xtheme-slate.css" type="text/css" />
+    <link rel="stylesheet" href="/webmap/openlayers/theme/default/style.css" type="text/css" />
+    <link rel="stylesheet" href="/media/css/amndss.css" type="text/css" />
+    <link rel="stylesheet" href="/media/css/report.css" type="text/css" />
+    <link rel="stylesheet" href="/media/css/color-picker.ux.css" type="text/css" />
+  </head>
+  <body>
+    <div id="loading-mask" style=""></div>
+    <div id="loading"><div class="loading-indicators">
+        <img src="/media/images/large-loading.gif" style="margin-right:8px;" align="absmiddle"/>
+        Loading...
+    </div>
+    <!-- Ext -->
+    <script src="/webmap/ext/adapter/ext/ext-base.js" type="text/javascript"></script>
+    <script src="/webmap/ext/ext-all-debug.js" type="text/javascript"></script>
+    <!-- OpenLayers --> 
+    <script src="/media/js/openlayers/OpenLayers-2.8/OpenLayers.debug.js" type="text/javascript"></script> 
+    <!-- <script src="/media/js/openlayers/OpenLayers-2.8/lib/Firebug/firebug.js" type="text/javascript"></script> -->
+    <!-- NOTE: ALL proj4js-specific javascript files are sent through the jsmin minifyer -->    
+    <!--       If you want to add a new js file to the app, it needs to be referenced in -->    
+    <!--       the jsmin_proj4js code in the main views.py django script. -->    
+    <script src="/jsmin_proj4js/" type="text/javascript"></script>
+    <!-- Google -->
+    <!-- <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{GOOGLE_API_MAPS_KEY}}" type="text/javascript"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    
+    <!--<script src='https://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>-->
+    <!--<script src="https://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>-->
+
+    <!-- <script type="text/javascript" src="../../mfbase/mapfish/MapFish.js"></script> -->
+    <!-- AMNDSS -->
+    <!-- NOTE: ALL AMNDSS-specific javascript files are sent through the jsmin minifyer -->    
+    <!--       If you want to add a new js file to the app, it needs to be referenced in -->    
+    <!--       the jsmin code in the main views.py django script. -->
+    <script>
+        var _external_wms_layers = eval( {{ external_wms_layers|safe }} );
+        var _rectifier_wms_layers = eval( {{ rectifier_wms_layers|safe }} );
+    </script>
+    {% if minify %}
+        <script src="/jsmin/" type="text/javascript"></script>
+    {% else %}
+        <script src="/jsfull/" type="text/javascript"></script>
+    {% endif %}
+    {% if settings.CSRF %}
+        {% include 'csrf.html' %}
+    {% endif %}
+    <script>
+    AMNDSS.referralStatusOptions = {{ referral_status_options|safe }};
+    AMNDSS.spatialReferenceID = {{ spatial_reference_id }};
+    </script>
+  </body>
+</html>

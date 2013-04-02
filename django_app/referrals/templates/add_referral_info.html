@@ -1,0 +1,118 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+{% block content %}
+
+
+<link rel="stylesheet" type="text/css" href="/media-admin/css/forms.css" />
+<h2>Step 2: Proposed Land Use Activity Information Entry</h2><hr/><br/>
+<form method="POST" action="">
+    {# csrf_token #}
+    <font color="red"><i><b>*</b>&nbsp;Required field.</i></font><br/><br/>
+    <div style="display:none">{{ form.referral_shape }}</div>
+    <table border=0 id='referral'>
+
+        <tr><td><b>Date of Submission:</td><td width="320px">
+        <input id="id_date_of_submission" class="vDateField" type="text" name="date_of_submission"/>
+        &nbsp;<font color="red"><b>*</b></font>&nbsp; {{ form.date_of_submission.errors }}
+        </td><td></td></tr>
+
+        <tr><td><b>First Nations Contact Person(s):</b></td><td>
+        {{ form.first_nations_contact }} {{ form.first_nations_contact.errors }}
+        </td><td><i>(Identify Band or group of Bands that Land Use Activity relates to)</i></td></tr>
+
+        <tr><td><b>Proponent Organization:</b></td><td>
+        {{ form.proponent_name }}&nbsp;<font color="red"><b>*</b></font>{{ form.proponent_name.errors }}
+        </td><td></td></tr>
+
+        <tr><td><b>Proponent Contact(s):</b></td><td>
+        {{ form.contact_person }}&nbsp;<font color="red"><b>*</b></font>{{ form.contact_person.errors }}
+        </td><td></td></tr>
+        
+        <tr><td><b>Proposal:</b><br/></td><td>
+        {{ form.proposal_desc }}&nbsp;<font color="red"><b>*</b></font>{{ form.proposal_desc.errors }}
+        <td><i>(describe in plain language, avoid technical terms, use broad perspective, and include a general description of the provincial approvals being sought in connection with the proposal)</i></td></tr>
+
+        <tr><td><b>Location:</b></td><td>
+        {{ form.location_desc }}&nbsp;<font color="red"><b>*</b></font>{{ form.location_desc.errors }}
+        </td><td><i>(in addition to the description of the location reference should be made to attached maps)</i></td></tr>
+
+        <tr><td><b>Date Requested By:</b></td><td>
+        <input id="id_date_requested_by" class="vDateField" type="text" name="date_requested_by"/>
+        &nbsp;<font color="red"><b>*</b></font>&nbsp; {{ form.date_requested_by.errors }}
+        </td><td><i>(date; give deadline if desired - 60 days from date of letter preferred if not otherwise dictated by policy or legislation)</i></td></tr>
+
+        <tr><td><b>Response is Requested By:</b></td><td>
+        {{ form.date_requested_by_desc }} {{ form.date_requested_by_desc.errors }}
+        </td><td><i>(explain why deadline is important)</i></td></tr>
+
+        <tr><td><b>Legal Description:</b></td><td>
+        {{ form.legal_desc }}&nbsp;<font color="red"><b>*</b></font>{{ form.legal_desc.errors }}
+        </td><td></td></tr>
+        
+        <tr><td><b>Schedule/Term of Proposal:</b></td><td>
+        {{ form.term_of_proposal }}&nbsp;<font color="red"><b>*</b></font>{{ form.term_of_proposal.errors }}
+        <td></td></tr>
+        
+        <tr><td><b>Authorization or Decision to be made:</b></td><td>
+        {{ form.authorization_desc }} {{ form.authorization_desc.errors }}
+        </td><td><i>(describe in terms that are more detailed than those set out above)</i></td></tr>
+
+        <tr><td><b>Background/Context:</b></td><td>
+        {{ form.background_context }} {{ form.background_context.errors }}
+        </td><td></td></tr>
+
+        <tr><td><b>BCGS (1:20,000) Mapsheet:</b></td><td colspan=2>
+            <table>
+                <tr><td>{{ form.bcgs_mapsheet_quad.label_tag }}</td><td>{{ form.bcgs_mapsheet_map_block.label_tag }}</td><td>{{ form.bcgs_mapsheet_sheet.label_tag }}</td></tr>
+                <tr><td>{{ form.bcgs_mapsheet_quad }}</td><td>{{ form.bcgs_mapsheet_map_block }}</td><td>{{ form.bcgs_mapsheet_sheet }}</td></tr>
+            </table>
+        </td></tr>
+
+        <tr><td><b>Other Information:</b></td><td>
+        {{ form.other_info }} {{ form.other_info.errors }}</td><td><i>(include other relevant information, including:</b> FN's that the province has identified with potential interests in the area); known information on traditional use, archaeological sites or similar (this information is intended mostly for operational decisions and not for administrative decisions that cover large tracts of land such as: TSR review, issuance of Forest Licence, etc., and the consultation will take place at the operational stage): avoid wide dispersal of sensitive information); past consultation (and results) where relevant and readily available (this refers to consultation conducted over the same area as the new application, i.e., if this is a renewal tenure consultations might have been done on the original application, or the consultation might have been done on an investigative permit and now it is the permit that is being issued); attach documents if appropriate, including an application if available.)
+        </i></td></tr>
+
+        <tr><td><b>Related Decisions to be made:</b></td><td>
+        {{ form.related_decisions }} {{ form.related_decisions.errors }}
+        </td><td><i>(List any included or upcoming decisions by agency which may be related to the primary decision subject to consultation. If the proposal will require a number of decisions, set them out in anticipated chronological order to convey the sequencing of the various decisions. Where the related decisions have a different Proponent, or different Size, etc, include such information for each decision.)</i></td></tr>
+
+        <tr><td><b>Other Known Decision(s) (activities related to this proposal):</b></td>
+        <td colspan=2>
+            <table>
+                <tr><td>{{ form.agency_moe.label_tag }}</td><td>
+                {{ form.agency_moe }} {{ form.agency_moe.errors }}</td></tr>
+                <tr><td>{{ form.agency_mempr.label_tag }}</td><td>
+                {{ form.agency_mempr }} {{ form.agency_mempr.errors }}</td></tr>
+                <tr><td>{{ form.agency_ilmb.label_tag }}</td><td>
+                {{ form.agency_ilmb }} {{ form.agency_ilmb.errors }}</td></tr>
+                <tr><td>{{ form.agency_mal.label_tag }}</td><td>
+                {{ form.agency_mal }} {{ form.agency_mal.errors }}</td></tr>
+                <tr><td>{{ form.agency_mot.label_tag }}</td><td>
+                {{ form.agency_mot }} {{ form.agency_mot.errors }}</td></tr>
+                <tr><td>{{ form.agency_mtca.label_tag }}</td><td>
+                {{ form.agency_mtca }} {{ form.agency_mtca.errors }}</td></tr>
+                <tr><td>{{ form.agency_mofr.label_tag }}</td><td>
+                {{ form.agency_mofr }} {{ form.agency_mofr.errors }}</td></tr>
+                <tr><td>{{ form.agency_mcd.label_tag }}</td><td>
+                {{ form.agency_mcd }} {{ form.agency_mcd.errors }}</td></tr>
+                <tr><td>{{ form.agency_other.label_tag }}</td><td>
+                {{ form.agency_other }} {{ form.agency_other.errors }}</td></tr>
+            </table>
+        </td></tr>
+    </table>
+   <input type="hidden" value="false" name="Confirm" />
+   <input type="submit" value="Confirm" />
+</form>
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/media-admin/js/core.js"></script>
+<script src='http://code.jquery.com/jquery-1.4.4.min.js'></script>
+<script>
+    var django = window.django || {};
+    django.jQuery = jQuery;
+</script>
+<script type="text/javascript" src="/media-admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/media-admin/js/getElementsBySelector.js"></script>
+<script type="text/javascript" src="/media-admin/js/actions.js"></script>
+<script type="text/javascript" src="/media-admin/js/calendar.js"></script>
+<script type="text/javascript" src="/media-admin/js/admin/DateTimeShortcuts.js"></script>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base_site.html" %}
+
+{% block title %}Sign up{% endblock %}
+
+{% block content_header %}Sign up{% endblock %}
+
+{% block content %}
+
+<p>Please fill out the registration form (all fields are required), and your account will be created.<br/>
+You will be sent an email with instructions on how to complete your registration.</p>
+
+{% if form.errors %}
+<p class="error">Please correct the errors below:</p>
+{% endif %}
+
+<form method="post" action="">{# csrf_token #}
+<table>
+<tr>
+  <td><label for="id_username">Username:</label></td>
+  <td>{{ form.username }}</td>
+  {% if form.username.errors %}<td><span class="error">{{ form.username.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_email">Email address:</label></td>
+  <td>{{ form.email }}</td>
+  {% if form.email.errors %}<td><span class="error">{{ form.email.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_first_name">First Name:</label></td>
+  <td>{{ form.first_name }}</td>
+  {% if form.first_name.errors %}<td><span class="error">{{ form.first_name.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_last_name">Last Name:</label></td>
+  <td>{{ form.last_name }}</td>
+  {% if form.last_name.errors %}<td><span class="error">{{ form.last_name.errors|join:", " }}</span></td>{% endif %}
+</tr>
+
+<tr>
+  <td><label for="id_address">Address:</label></td>
+  <td>{{ form.address }}</td>
+  {% if form.address.errors %}<td><span class="error">{{ form.address.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_city">City or town:</label></td>
+  <td>{{ form.city }}</td>
+  {% if form.city.errors %}<td><span class="error">{{ form.city.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_state">Province or state:</label></td>
+  <td>{{ form.state }}</td>
+  {% if form.state.errors %}<td><span class="error">{{ form.state.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_zip">Postal Code:</label></td>
+  <td>{{ form.zip }}</td>
+  {% if form.zip.errors %}<td><span class="error">{{ form.zip.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_password1">Password:</label></td>
+  <td>{{ form.password1 }}</td>
+  {% if form.password1.errors %}<td><span class="error">{{ form.password1.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr>
+  <td><label for="id_password2">Password (type again to catch any typos):</label></td>
+  <td>{{ form.password2 }}</td>
+  {% if form.password2.errors %}<td><span class="error">{{ form.password2.errors|join:", " }}</span></td>{% endif %}
+</tr>
+<tr><td></td><td><input type="submit" value="Register" /></td></tr>
+</table>
+</form>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}

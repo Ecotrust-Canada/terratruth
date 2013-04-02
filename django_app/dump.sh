@@ -1,0 +1,1 @@
+python manage.py dumpdata --format=xml auth sites contenttypes flatpages wms_layers user_groups referrals profiles > profiles/fixtures/initial_data.xml

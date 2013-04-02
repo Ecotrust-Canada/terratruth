@@ -1,0 +1,19 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% if error_msg %}
+
+{{ error_msg }}  
+
+{% else %}
+
+An error has occurred.<br/><br/>
+Please go back and try again.  If that doesn't work, please notify an administrator.  
+<br/>
+<br/>Thanks.
+
+{% endif %}
+
+{% endblock %} 

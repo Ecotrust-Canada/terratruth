@@ -1,0 +1,15 @@
+
+.selector {
+/* override width */
+    width: 1000px !important;
+}
+
+.selector select {
+/* override width */
+    width: 470px !important;
+}
+
+.selector-available, .selector-chosen {
+/* override width */
+    width: 470px !important;
+}

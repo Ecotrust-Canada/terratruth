@@ -1,0 +1,30 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+{% block content %}
+
+<script>
+function back()
+    {window.location = "/referral/add_referral_info/"}
+</script>
+<h2>Step 3: Confirm entered data</h2><hr/>
+    <table border=0 id='referral'>
+        {% for field in user_values %}
+        <tr>
+            <p><td><b>{{ field.label }}</b>:</td><td>{{ field.value }}</td></p>
+        </tr>
+        {% endfor %}
+    </table>
+    
+<form method="POST" action="">{# csrf_token #}
+   <div style="display:none">
+        {% for field in form %}
+            <p><b>{{ field.label_tag }}</b>: {{ field }}</p>
+            {{ field.errors }}<br/><br/> 
+        {% endfor %}
+   </div>
+   <input type="hidden" value="true" name="Confirm" />
+   <input type="submit" value="Confirm" />
+   <input type="button" value="Cancel" onclick="back()"/>
+</form>
+
+{% endblock %}

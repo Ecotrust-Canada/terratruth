@@ -1,0 +1,47 @@
+{% extends "base_site.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    {% if form.errors %}
+    <p class="errorlist">{% trans "Sorry there are corrections needed in your form below:" %} {{ form.non_field_errors }}</p>
+    {% endif %}
+    {% if form.is_multipart %}
+    <form enctype="multipart/form-data" method="post" action=".">{# csrf_token #}
+    {% else %}
+    <form method="post" action=".">{# csrf_token #}
+   {% endif %}
+    <table>
+    <tr>
+    <th align="left">{% trans "Address" %}</th>
+      <td>{{form.address}} </td>
+      {% if form.address.errors %}<td><span class="error">{{ form.address.errors|join:", " }}</span></td>{% endif %}
+    </tr>
+    <tr>
+    <th align="left">{% trans "City or town" %}</th>
+      <td>{{form.city}} </td>
+      {% if form.city.errors %}<td><span class="error">{{ form.city.errors|join:", " }}</span></td>{% endif %}
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "Province or state" %}</th>
+      <td>{{form.state}} </td>
+      {% if form.state.errors %}<td><span class="error">{{ form.state.errors|join:", " }}</span></td>{% endif %}
+    </tr>
+    
+    <tr>
+    <th align="left">{% trans "Postal Code" %}</th>
+      <td>{{form.zip}} </td>
+      {% if form.zip.errors %}<td><span class="error">{{ form.zip.errors|join:", " }}</span></td>{% endif %}
+    </tr>
+    
+    <tr>
+    <th align="left">Should my site profile be viewable by others?</th>
+      <td>{{form.is_public}} </td>
+    </tr>
+
+    </table>
+   <!-- {{ form.as_p }} -->
+   <input type="submit" value="Save" />
+   </form>
+{% endblock %}

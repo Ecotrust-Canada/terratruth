@@ -1,0 +1,7 @@
+#!/bin/bash
+# run the django fcgi server
+
+sudo ps aux | grep "django_app/manage.py runfcgi" | grep -v grep | awk '{system("sudo kill " $2)}'
+sudo -u www-data python /usr/local/apps/amndss/django_app/manage.py runfcgi method=threaded host=127.0.0.1 port=3033
+echo successfully restarted AMNDSS
+

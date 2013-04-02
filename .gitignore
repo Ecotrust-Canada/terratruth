@@ -1,0 +1,3 @@
+*.pyc
+mapserver/private_map_files/*
+django_app/local_settings.py

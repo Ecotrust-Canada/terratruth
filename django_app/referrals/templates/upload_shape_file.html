@@ -1,0 +1,33 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+{% block content %}
+<h2>Step 1: Upload a Proposed Land Use Activity Shapefile</h2><hr/><br/>
+<form enctype="multipart/form-data" method="post" action="/referral/upload_referral_shapefile/">
+
+    <br/><font color="red"><i><b>*</b>&nbsp;Required field.</i></font><br/><br/>
+    <table border=0>
+    <tr><td>
+        <div>
+            <label>Description:</label>
+            <input type="text" name="desc" style="width: 250px;"/>&nbsp;<font color="red"><b>*</b></font>
+            {{ form.desc.errors }}
+        </div>
+    </td><td></td></tr>
+    <tr><td>
+        <div>
+            <label>Shapefile ZIP (*.zip):</label>
+            <input type="file" name="upload"/>&nbsp;<font color="red"><b>*</b></font>
+            {{ form.upload.errors }}<br/>
+            </td><td>File Requirements:
+            <ol>
+            <li>Ensure the GIS file is in an ESRI shapefile format</li>
+            <li><b>Projection requirements</b>:</br>For British Columbia users ensure the shapefile is in <b>BC Albers</b>, for Ontario users the shapefile needs to be in <b>Ontario MNR Lambert</b></li>
+            <li>Compress the file to a .zip format (using <a href="http://www.winzip.com/">WinZip</a> or compatible tool) including the following files: .shp, .shx, .dbf, .prj</li>
+            </ol>
+        </div>
+    </td></tr>
+    </table>
+        <input type="hidden" value="true" name="web_form_entry" />
+        <input type="submit" value="Upload" />
+</form>
+{% endblock %}

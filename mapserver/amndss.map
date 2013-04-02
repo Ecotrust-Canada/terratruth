@@ -1,0 +1,260 @@
+################ E c o t r u s t  C a n a d a #################
+##                                                           ##
+##                   www.ecotrust.ca                         ##
+##                                                           ##
+##              Copyright 2011, Ecotrust Canada              ##
+##                                                           ##
+################ E c o t r u s t  C a n a d a #################
+MAP
+  NAME "AMNDSS_WMS"
+  STATUS ON
+
+  #Default extent
+  EXTENT -180 -90 180 90
+
+  #Default size
+  SIZE 800 600
+
+  #Paths for data and symbols
+  SHAPEPATH ""
+  SYMBOLSET "/usr/local/apps/amndss/mapserver/etc/symbols.sym"
+  FONTSET "/usr/local/apps/amndss/mapserver/etc/fonts.txt"
+
+  #Default image type
+  IMAGETYPE gif
+  IMAGECOLOR 255 255 255
+
+  #Default units for the map
+  UNITS DD
+
+  WEB
+    IMAGEPATH "/tmp/ms_temp/"
+    IMAGEURL "/tmp/ms_temp/"
+    METADATA
+      "wms_title" "AMNDSS WMS Server"
+      "wms_onlineresource" "http://terratruth.info/cgi-bin/amndss.cgi?"
+      "wms_srs" "epsg:4326 epsg:900913 epsg:26910 epsg:3005"
+
+      "wfs_title" "AMNDSS WFS Server"
+      "wfs_onlineresource" "http://terratruth.info/cgi-bin/amndss.cgi?"
+      "wfs_srs" "epsg:4326 epsg:900913 epsg:26910 epsg:3005"
+    END
+  END
+
+  PROJECTION
+    #"init=epsg:4326"
+    "init=epsg:900913"
+  END
+
+  # Load legend
+  INCLUDE "legend.map"
+
+  SCALEBAR
+    STATUS ON
+    COLOR 100 100 100
+    IMAGECOLOR 255 255 255
+    UNITS KILOMETERS
+    INTERVALS 2
+    SIZE 200 3
+    STYLE 1
+    POSITION LL
+    INTERLACE TRUE
+    LABEL
+      TYPE BITMAP
+      SIZE LARGE
+      OFFSET 5 5
+      BUFFER 0
+      MINDISTANCE -1
+      MINFEATURESIZE -1
+      COLOR 0 0 0
+      PARTIALS TRUE
+      FORCE FALSE
+    END
+  END
+
+  LAYER
+    NAME "BC - First Nations Reserves"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_reserves_2005 using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - First Nations Reserves"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TEMPLATE foo
+    LABELITEM "ir_name"
+    CLASS
+      NAME "BC - First Nations Reserves"
+      STYLE
+        #COLOR 255 180 0
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 100
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+  END
+
+  LAYER
+    NAME "BC - Parks"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_bc_parks using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "BC - Parks"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    LABELITEM "pa_name"
+    CLASS
+      NAME "BC - Parks"
+      STYLE
+        COLOR 0 100 0
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+      LABEL
+        SIZE SMALL
+        MINFEATURESIZE 30
+        MINDISTANCE 200
+        POSITION CC
+        COLOR 0 20 70
+        PARTIALS FALSE
+        FORCE FALSE
+      END
+    END
+  END
+
+  LAYER
+    NAME "WORLD - Aboriginal Mapping Network Users"
+    STATUS ON
+    GROUP Public
+    DATA "the_geom from bd_general_amn_users using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "WORLD - Aboriginal Mapping Network Users"
+    END
+    TYPE point
+    UNITS DD
+    PROJECTION
+      "init=epsg:4326"
+    END
+    TEMPLATE foo
+    CLASS
+      NAME "AMN Users"
+      STYLE
+        SYMBOL "circle"
+        SIZE 8
+        COLOR 250 0 0
+      END
+    END
+  END
+
+  LAYER # OGMA legal, BC-wide
+    NAME "Old Growth Forest Management Areas (Legal)"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_bc_ogma_legal using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "Old Growth Forest Management Areas (Legal)"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Old Growth Forest Management Areas (Legal)"
+      STYLE
+        COLOR 51 255 102
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END # OGMA legal, BC-wide
+
+  LAYER # OGMA Not legal, BC-wide
+    NAME "Old Growth Forest Management Areas (Not Legal)"
+    STATUS OFF
+    GROUP Public
+    DATA "the_geom from bd_general_bc_ogma_not_legal using unique gid using SRID=3005"
+    CONNECTIONTYPE POSTGIS
+    CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+    METADATA
+      "wms_title" "Old Growth Forest Management Areas (Not Legal)"
+    END
+    TYPE polygon
+    UNITS DD
+    PROJECTION
+      "init=epsg:3005"
+    END
+    TRANSPARENCY 70
+    TEMPLATE foo
+    CLASS
+      NAME "Old Growth Forest Management Areas (Not Legal)"
+      STYLE
+        COLOR 51 153 102
+        OUTLINECOLOR 0 0 0
+        WIDTH 1
+        ANTIALIAS TRUE
+      END
+    END
+  END # OGMA Not legal, BC-wide
+
+  #LAYER # World Boundary
+  #  NAME "world_boundary"
+  #  STATUS OFF
+  #  #GROUP Public
+  #  DATA "the_geom from bd_general_world_boundary using unique gid using SRID=3005"
+  #  CONNECTIONTYPE POSTGIS
+  #  CONNECTION "user=amndss dbname=amndss host=localhost password=%password%"
+  #  METADATA
+  #    "wms_title" "world_boundary"
+  #  END
+  #  TYPE polygon
+  #  UNITS DD
+  #  PROJECTION
+  #    "init=epsg:3005"
+  #  END
+  #  TRANSPARENCY 70
+  #  TEMPLATE foo
+  #  CLASS
+  #    NAME "" #Empty so not used in legend
+  #    STYLE
+  #      COLOR 100 100 100
+  #      OUTLINECOLOR 255 255 255
+  #      WIDTH 1
+  #      ANTIALIAS TRUE
+  #    END
+  #  END
+  #END # World Boundary
+
+END # Map

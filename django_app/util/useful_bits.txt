@@ -1,0 +1,10 @@
+from django.contrib.auth.models import *
+from registration.models import *
+from registration_amn.forms import *
+from fn_groups.models import *
+from referrals.models import *
+from profiles.models import *
+from user_groups.models import *
+from wms_layers.models import *
+
+u = User.objects.filter(username='twelch')[0]

@@ -1,0 +1,14 @@
+
+  LEGEND
+    STATUS ON
+    IMAGECOLOR 255 255 255
+    KEYSIZE 20 10
+    INTERLACE off
+    LABEL
+      TYPE truetype
+      SIZE 8
+      FONT arialuni
+      COLOR 0 0 0
+    END
+  END
+
