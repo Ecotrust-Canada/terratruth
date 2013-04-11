@@ -2,8 +2,8 @@
 <VirtualHost *:443>
   ServerName terratruth.example.com
 
-  DocumentRoot /usr/local/apps/amndss/
-  FastCGIExternalServer /usr/local/apps/amndss/mysite.fcgi -host 127.0.0.1:3033
+  DocumentRoot /usr/local/apps/terratruth/
+  FastCGIExternalServer /usr/local/apps/terratruth/mysite.fcgi -host 127.0.0.1:3033
 
   RewriteEngine On
 
@@ -20,7 +20,7 @@
     Allow from all
   </Location>
 
-  Alias /media /usr/local/apps/amndss/media
+  Alias /media /usr/local/apps/terratruth/media
 
   <Location /media>
     Order allow,deny

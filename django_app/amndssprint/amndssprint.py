@@ -94,11 +94,11 @@ class AMNPdf(object):
 if __name__ == '__main__':
     print "Test"
     
-    sys.path.append('/usr/local/apps/amndss/django_app')
+    sys.path.append('/usr/local/apps/terratruth/django_app')
     from util.amn_map import *
     
     fields = pickle.load(open('/tmp/fields.pkl','r'))
     imageGenerator = AmnMap(fields)
-    pdfObject = AMNPdf(fields,'/usr/local/apps/amndss/media/images/ECLogoColour-small.jpg')
+    pdfObject = AMNPdf(fields,'/usr/local/apps/terratruth/media/images/ECLogoColour-small.jpg')
     pdfObject.createPdf(imageGenerator)
     

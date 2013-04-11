@@ -73,6 +73,9 @@ AMNDSS.Map = function (mapdiv) {
             //
             // specify custom centre point based on FN group...
             var groups = AMNDSS.user.group_layers;
+            if (typeof groups=='undefined') {
+                alert ("User needs to be assigned to a user_group in admin/user_groups/usergroupmembership");
+            }
             var group = groups[0];
             var group_name = group.group_name;
             var mapLon = group.long_coord;
@@ -234,10 +237,10 @@ AMNDSS.Map = function (mapdiv) {
             // And the navigation tools
             var basicTools = Ext.get('basicTools');
             this.basicToolbar = new OpenLayers.Control.Panel({
-                div: basicTools
+                div: basicTools.dom
             });
 
-            // And the selection tools
+            // And the selection tools // LSG there do not seem to be any selectTools
             var selectTools = Ext.get('selectTools');
             this.selectToolbar = new OpenLayers.Control.Panel({
                 div: selectTools

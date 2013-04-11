@@ -154,4 +154,4 @@ EMAIL_HOST_USER = 'referrals'
 LOGIN_URL = '/accounts/login'
 LOGIN_REDIRECT_URL = '/main'
 
-MAPSERVER_DIR = '/usr/local/apps/amndss/mapserver/'
+MAPSERVER_DIR = '/usr/local/apps/terratruth/mapserver/'

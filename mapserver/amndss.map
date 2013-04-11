@@ -17,8 +17,8 @@ MAP
 
   #Paths for data and symbols
   SHAPEPATH ""
-  SYMBOLSET "/usr/local/apps/amndss/mapserver/etc/symbols.sym"
-  FONTSET "/usr/local/apps/amndss/mapserver/etc/fonts.txt"
+  SYMBOLSET "/usr/local/apps/terratruth/mapserver/etc/symbols.sym"
+  FONTSET "/usr/local/apps/terratruth/mapserver/etc/fonts.txt"
 
   #Default image type
   IMAGETYPE gif
