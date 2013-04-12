@@ -42,8 +42,8 @@ MAP
   END
 
   PROJECTION
-    #"init=epsg:4326"
-    "init=epsg:900913"
+    "init=epsg:4326"
+    #"init=epsg:900913"
   END
 
   # Load legend

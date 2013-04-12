@@ -258,8 +258,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
 
                 if (layer.isBaseLayer) baseLayerNames.push(name);
 
-                // LSG WMS.Untiled is deprecated so this part removed from if expression && !(layer instanceof OpenLayers.Layer.WMS.Untiled)
-                if (!(layer instanceof OpenLayers.Layer.WMS) ) {
+                if (!(layer instanceof OpenLayers.Layer.WMS))  {
                     return;
                 }
 
@@ -443,6 +442,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
 
             // open the Legend window at the top right corner of the map
             AMNDSS.LegendWindow.draw();
+
             // init vars
             var wmsLayers = {};
             var iconUrl;
@@ -469,10 +469,13 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
                 }
 
                 layerSpanID = this.convertToId(sublayerName);
+                //console.log("layerSpanID = ", layerSpanID);
                 layerSpan = document.getElementById(layerSpanID);
+                //console.log("layerSpan = ", layerSpan);
 
                 if (visible) {
 
+                    //console.log("layer.hide_in_legend = " + layer.hide_in_legend);
 
                     // don't show icon for the base layer
                     if (!layer.hide_in_legend) {
@@ -488,6 +491,8 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
                         // add this layer to the legend window
                         AMNDSS.LegendWindow.update(this.layerNameToUrl[sublayerName], layer, sublayerName);
                     } else {
+                        //console.log("layer.name = ", layer.name);
+                        //console.log("layerSpan = ", layerSpan);
                         if (layerSpan) layerSpan.innerHTML = " <i>(no legend)</i>";
                     }
 
@@ -559,7 +564,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
                     return;
                 }
                 if (sublayers.length == 0) {
-                    layer.setVisibility(false); // was false, true
+                    layer.setVisibility(false, true);
                 } else {
                     // If drag and drop is not active, we try to preserve the
                     //  sublayer order from the one set during layer construction.
@@ -582,7 +587,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
 
                     layer.params.LAYERS = sublayers;
                     layer.redraw();
-                    layer.setVisibility(true); // was true, true
+                    layer.setVisibility(true, true);
                 }
             }
         }
@@ -621,8 +626,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
             var l = layersArray[i];
             var wmsChildren = [];
 
-            // LSG WMS.Untiled is deprecated so remvoed from expression || l instanceof OpenLayers.Layer.WMS.Untiled
-            if (l instanceof OpenLayers.Layer.WMS ) {
+            if (l instanceof OpenLayers.Layer.WMS) {
 
                 var sublayers = l.params.LAYERS;
                 var iconUrl;

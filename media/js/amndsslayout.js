@@ -561,8 +561,8 @@ AMNDSS.Layout = function () {
             var formFields = form.getValues();
 
             var wkt_maker = new OpenLayers.Format.WKT({
-                //'internalProjection': new OpenLayers.Projection("EPSG:4326"),
-                'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                'internalProjection': new OpenLayers.Projection("EPSG:4326"),
+                //'internalProjection': new OpenLayers.Projection("EPSG:900913"),
                 'externalProjection': new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID)
             });
             var shape_wkt = wkt_maker.write(shape);
