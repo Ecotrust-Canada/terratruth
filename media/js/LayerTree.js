@@ -22,7 +22,6 @@
  * @requires OpenLayers/Layer/WMS/Untiled.js
  */
 Ext.namespace('mapfish.widgets');
-debugger;
 mapfish.widgets.LayerTree = function (config) {
     Ext.apply(this, config);
     mapfish.widgets.LayerTree.superclass.constructor.call(this);

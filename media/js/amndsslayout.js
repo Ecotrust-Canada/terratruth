@@ -265,7 +265,7 @@ AMNDSS.Layout = function () {
                     }]
                 },
                 {
-                    columnWidth: 0.2,
+                    columnWidth: 0.23,
                     height: 30,
                     border: false,
                     style: 'padding-top:5px',
@@ -285,7 +285,7 @@ AMNDSS.Layout = function () {
                     }]
                 },
                 {
-                    columnWidth: 0.2,
+                    columnWidth: 0.17,
                     height: 30,
                     border: false,
                     style: 'padding-top:5px; padding-left: 5px',
