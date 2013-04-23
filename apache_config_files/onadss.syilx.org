@@ -1,0 +1,108 @@
+<IfModule mod_ssl.c>
+<VirtualHost *:3443>
+
+  ### NOTE: we're not using the standard 443 https port since it is already being used on the ONA site ###
+
+  ServerName onadss.syilx.org:3443
+
+  #### SSL Settings ####
+
+  SSLEngine on
+
+  SSLCertificateFile    /etc/ssl/certs/onadss_syilx_org.crt
+  SSLCertificateKeyFile /etc/ssl/private/private.key
+  SSLCertificateChainFile /etc/ssl/certs/onadss_syilx_org.ca-bundle
+
+  RewriteEngine On
+
+  DocumentRoot /usr/local/apps/amndss/
+  FastCGIExternalServer /usr/local/apps/amndss/mysite.fcgi -host 127.0.0.1:3033
+
+  RewriteRule ^/(media.*|webmap.*)$ /$1 [QSA,L,PT]
+  RewriteRule ^/(cgi.*)$ /$1 [QSA,L,PT]
+  RewriteRule ^/(.*)$ /mysite.fcgi/$1 [QSA,L]
+
+  SetEnv GDAL_DATA /usr/share/gdal16
+
+  #### Path Settings ####
+
+  Alias /media-admin /usr/local/django-trunk/django/contrib/admin/media
+
+  <Location /media-admin>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  Alias /media /usr/local/apps/amndss/media
+
+  <Location /media>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  Alias /webmap /var/www/webmap
+
+  <Location /media>
+    Order allow,deny
+    Allow from all
+  </Location>
+
+  #### CGI Settings ####
+
+  ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+  <Directory "/usr/lib/cgi-bin">
+    AllowOverride None
+    #Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+    Options +ExecCGI -MultiViews +FollowSymLinks
+    Order allow,deny
+    Allow from all
+    SSLOptions +StdEnvVars
+  </Directory>
+
+  # Only allow local access to private directory, controlling access
+  # to mapserver and private mapfiles
+  <Directory "/usr/lib/cgi-bin/private">
+    AllowOverride None
+    Options None
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.0/255.0.0.0 ::1/128
+  </Directory>
+
+  #### General Settings ####
+  ServerAdmin grant@ecotrust.ca
+
+  ErrorLog /var/log/apache2/error.log
+  LogLevel warn
+  CustomLog /var/log/apache2/ssl_access.log combined
+
+  <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+  </FilesMatch>
+
+  BrowserMatch ".*MSIE.*" \
+        nokeepalive ssl-unclean-shutdown\
+        downgrade-1.0 force-response-1.0
+</VirtualHost>
+</IfModule>
+
+#### Setup port 80 (http) to simply forward onadss.sylix.org requests on to 3443
+#### (https, but not the standard one of 443 since it's already being used)
+<VirtualHost *:80>
+  RewriteEngine On
+  RewriteRule ^/(.*) https://onadss.syilx.org:3443/$1 [L,R]
+  ServerName onadss.syilx.org
+  ServerAlias www.onadss.syilx.org
+
+  <Location "/">
+  </Location>
+  <Location "/cgi-bin/">
+      SetHandler None
+  </Location>
+</VirtualHost>
+
+# Required in order to serve up a rectified image via WMS
+WSGIRestrictStdin Off
+
+
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-sys.path = ['/usr/local/Django-1.1.1/'] + sys.path
+sys.path += ['/usr/lib/python2.7/dist-packages'] + sys.path
 from django.core.management import execute_manager
 try:
     import settings # Assumed to be in the same directory.

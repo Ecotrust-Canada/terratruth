@@ -133,7 +133,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.flatpages',
-    'django_evolution',
     'registration',
     'profiles',
     'batchadmin',
