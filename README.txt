@@ -36,6 +36,11 @@ X) Install jsmin (or add it to the path of the application).
 
 % sudo cp bin/jsmin /usr/bin/
 
+Z) app data directories
+% sudo mkdir -p /var/www/html/amndss/images/rectified/
+% sudo mkdir -p /projects/amndss
+
+
 RUNNING
 =======
 

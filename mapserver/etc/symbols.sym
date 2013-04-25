@@ -156,9 +156,6 @@ SYMBOLSET
         0 0.8
         0 0
       END
-      STYLE
-        8  8 8 8
-      END
       FILLED TRUE
     END
      
