@@ -16,10 +16,10 @@ AMNDSS.LatLongZoomPanel = function(map){
                     var form = this.findLatLon.getForm();
                     var formFields = form.getValues();
                     //console.log(formFields);
-                    //var internalProjection = new OpenLayers.Projection("EPSG:4326");
-                    //var externalProjection = new OpenLayers.Projection("EPSG:4326");
-                    var internalProjection = new OpenLayers.Projection("EPSG:900913");
-                    var externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
+                    var internalProjection = new OpenLayers.Projection("EPSG:4326");
+                    var externalProjection = new OpenLayers.Projection("EPSG:4326");
+                    //var internalProjection = new OpenLayers.Projection("EPSG:900913");
+                    //var externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
                     var lonlat = new OpenLayers.LonLat(formFields.longitude, formFields.latitude);
 
 	                //Map passed in when constructed

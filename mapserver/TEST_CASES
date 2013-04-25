@@ -64,7 +64,7 @@ Expected Result: 403 Forbidden . .You don.t have permission.. or something along
 yyy
 Using an external system, try to specify the private mapfile in your map request using the public interface (override map get variable)
 Expected Outcome: Fail
-https://amn-dev.ecotrust.ca/cgi-bin/amndss.cgi?map=/usr/local/apps/amndss/mapserver/amndss-private.map&LAYERS=Habitat%20Potential,Old%20Growth%20Management%20Area&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,50.625,-123.046875,51.328125&WIDTH=256&HEIGHT=256
+https://amn-dev.ecotrust.ca/cgi-bin/amndss.cgi?map=/usr/local/apps/terratruth/mapserver/amndss-private.map&LAYERS=Habitat%20Potential,Old%20Growth%20Management%20Area&TRANSPARENT=true&FORMAT=image%2Fgif&SRS=EPSG%3A4326&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&STYLES=&EXCEPTIONS=application%2Fvnd.ogc.se_inimage&BBOX=-123.75,50.625,-123.046875,51.328125&WIDTH=256&HEIGHT=256
 Reason: It is possible to provide the mapfile to use in your WMS request using the .map. variable, however the cgi.s both append their own 
 
 mapfiles to use and the user-supplied one that then follows is ignored.

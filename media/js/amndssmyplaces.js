@@ -5,8 +5,7 @@ AMNDSS.MyPlaces = function () {
         _init: function () {
 
             var me = this;
-            //this.internalProjection = new OpenLayers.Projection("EPSG:4326");
-            this.internalProjection = new OpenLayers.Projection("EPSG:900913");
+            this.internalProjection = new OpenLayers.Projection("EPSG:4326");
             this.externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
             this.wkt = new OpenLayers.Format.WKT({
                 'internalProjection': this.internalProjection,
@@ -905,7 +904,7 @@ AMNDSS.MyPlaces = function () {
             
             if (typeof AMNDSS.urlParams.rts_id === 'undefined') return;
             try {
-              rts_id = AMNDSS.urlParams.rts_id;
+              rts_id = parseInt(AMNDSS.urlParams.rts_id);
             } catch(e) {
               return;
             }

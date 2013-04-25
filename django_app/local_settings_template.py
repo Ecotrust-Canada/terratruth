@@ -16,7 +16,7 @@ EMAIL_HOST_PASSWORD = ''
 HOST = 'http://terratruth.info'
 WEB_URL = '/var/www/html/'
 
-BASE_DIR = '/usr/local/apps/amndss/'
+BASE_DIR = '/usr/local/apps/terratruth/'
 PRIVATE_MAPFILE = BASE_DIR + '/mapserver/private_map_files/amndss-private.map'
 USER_LOADED_MAPFILE = BASE_DIR + '/mapserver/private_map_files/user_shapes.map'
 

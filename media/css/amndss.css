@@ -72,17 +72,11 @@
 }
 
 .olControlOverviewMapElement {
-    padding: 5px 5px 5px 5px;
+    padding: 2px 2px 2px 2px !important;
     background-color: #3F4D61;
     -moz-border-radius: 0 0 0 0;
 }
-
-.olControlEditingToolbar  {
-  float:left;
-  right: 0px;
-  /* #height: 30px; */
-  width: 140px!important;
-}    
+ 
 .olControlEditingToolbar .olControlHoverItemActive { 
   background-image: url("/media/images/amn_query_on.png");
   background-repeat: no-repeat;
@@ -152,8 +146,10 @@ div.olControlMousePosition {
     font-family: tahoma,arial,helvetica;
     padding: 2px;
     font-size: 11px;
-    bottom: 37px;  
-    left: 3px;
+    /* Openlayers 2.12 has different CSS, and their file is coming after ours */
+    bottom: 47px !important;
+    left: 10px !important;
+    right: auto !important;
 }
 
 .olControlScaleLine {

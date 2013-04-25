@@ -34,8 +34,7 @@ AMNDSS.Map = function (mapdiv) {
                     layers: layer_names,
                     transparent: 'true',
                     format: 'image/gif',
-                    //srs: 'epsg:4326'
-                    srs: 'epsg:900913'
+                    srs: 'epsg:4326'
                 },
                 {
                     visibility: false,
@@ -55,8 +54,7 @@ AMNDSS.Map = function (mapdiv) {
             // avoid pink tiles
             OpenLayers.Util.onImageLoadErrorColor = "transparent";
 
-            //this.internalProjection = new OpenLayers.Projection("EPSG:4326");
-            this.internalProjection = new OpenLayers.Projection("EPSG:900913");
+            this.internalProjection = new OpenLayers.Projection("EPSG:4326");
             this.externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
 
             this.geojson = new OpenLayers.Format.GeoJSON({
@@ -73,22 +71,20 @@ AMNDSS.Map = function (mapdiv) {
             //
             // specify custom centre point based on FN group...
             var groups = AMNDSS.user.group_layers;
+            if (typeof groups=='undefined') {
+                alert ("User needs to be assigned to a user_group in admin/user_groups/usergroupmembership");
+            }
             var group = groups[0];
             var group_name = group.group_name;
             var mapLon = group.long_coord;
             var mapLat = group.lat_coord;
             var mapZoom = group.mapzoom;
 
-            var projectionSphericalMercator = new OpenLayers.Projection("EPSG:900913");
-            var projectionLatLong = new OpenLayers.Projection("EPSG:4326");
-
             var mapOptions = {
-                projection: projectionSphericalMercator,
-                displayProjection: projectionLatLong,
-                units: "m",
-                sphericalMercator: true,
+                projection: "EPSG:4326",
+                units: "dd",
                 numZoomLevels: 20,
-                maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90).transform (projectionLatLong, projectionSphericalMercator),
+                maxExtent: new OpenLayers.Bounds(-180, -90, 180, 90),
                 controls: []
             };
 
@@ -100,11 +96,9 @@ AMNDSS.Map = function (mapdiv) {
             // Loop through each layer in the list and get the order value for each
             // Note: The order corresponds to the REVERSE order in which the layers 
             // display in the legend.
-            
             var by_order = {}, order, layer;
             for (var name in AMNDSS.LayerList) {
                 layer = AMNDSS.LayerList[name];
-                //console.log(layer);
                 if (layer.active) {
                     order = layer.order || 0;
                     if (by_order[order]) {
@@ -118,23 +112,19 @@ AMNDSS.Map = function (mapdiv) {
             // sort the layer list based on the order attribute
             var orders = Object.keys(by_order);
             orders.sort();
-
-            // OpenStreetMap base layer (appears but other WMS layers won't load on it)
-            var osmarender = new OpenLayers.Layer.OSM("OpenStreetMap", "http://c.tile.openstreetmap.org/${z}/${x}/${y}.png");
-            map.addLayer(osmarender);
-  
+ 
             // add each layer in the correct order
             for (var i = 0; i < orders.length; i++) {
                 map.addLayers(by_order[orders[i]]);
             }
-            
+
             // centre on the coordinates specified above (based on the FN)
-            map.setCenter(new OpenLayers.LonLat(mapLon, mapLat).transform (projectionLatLong, projectionSphericalMercator), mapZoom);
-            
+            map.setCenter(new OpenLayers.LonLat(mapLon, mapLat), mapZoom);
+
             // create reference map 
             map.addControl(new OpenLayers.Control.OverviewMap({
                 div: Ext.get('referenceMap'),
-                size: new OpenLayers.Size(338, 140)
+                size: new OpenLayers.Size(290, 140)
             }));
 
             // GNG 25June09
@@ -146,7 +136,6 @@ AMNDSS.Map = function (mapdiv) {
             this.map_component = new AMNDSS.OLMapComponent({
                 map: map
             });
-
             this.map_component.addEvents({
                 "shapeAdded": true,
                 "shapeModified": true
@@ -234,7 +223,7 @@ AMNDSS.Map = function (mapdiv) {
             // And the navigation tools
             var basicTools = Ext.get('basicTools');
             this.basicToolbar = new OpenLayers.Control.Panel({
-                div: basicTools
+                div: basicTools.dom
             });
 
             // And the selection tools

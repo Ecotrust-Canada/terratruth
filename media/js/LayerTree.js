@@ -22,7 +22,6 @@
  * @requires OpenLayers/Layer/WMS/Untiled.js
  */
 Ext.namespace('mapfish.widgets');
-
 mapfish.widgets.LayerTree = function (config) {
     Ext.apply(this, config);
     mapfish.widgets.LayerTree.superclass.constructor.call(this);
@@ -258,7 +257,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
 
                 if (layer.isBaseLayer) baseLayerNames.push(name);
 
-                if (!(layer instanceof OpenLayers.Layer.WMS) && !(layer instanceof OpenLayers.Layer.WMS.Untiled)) {
+                if (!(layer instanceof OpenLayers.Layer.WMS))  {
                     return;
                 }
 
@@ -626,7 +625,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
             var l = layersArray[i];
             var wmsChildren = [];
 
-            if (l instanceof OpenLayers.Layer.WMS || l instanceof OpenLayers.Layer.WMS.Untiled) {
+            if (l instanceof OpenLayers.Layer.WMS) {
 
                 var sublayers = l.params.LAYERS;
                 var iconUrl;

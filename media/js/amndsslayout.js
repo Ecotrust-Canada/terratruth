@@ -265,7 +265,7 @@ AMNDSS.Layout = function () {
                     }]
                 },
                 {
-                    columnWidth: 0.2,
+                    columnWidth: 0.23,
                     height: 30,
                     border: false,
                     style: 'padding-top:5px',
@@ -285,7 +285,7 @@ AMNDSS.Layout = function () {
                     }]
                 },
                 {
-                    columnWidth: 0.2,
+                    columnWidth: 0.17,
                     height: 30,
                     border: false,
                     style: 'padding-top:5px; padding-left: 5px',
@@ -561,8 +561,8 @@ AMNDSS.Layout = function () {
             var formFields = form.getValues();
 
             var wkt_maker = new OpenLayers.Format.WKT({
-                //'internalProjection': new OpenLayers.Projection("EPSG:4326"),
-                'internalProjection': new OpenLayers.Projection("EPSG:900913"),
+                'internalProjection': new OpenLayers.Projection("EPSG:4326"),
+                //'internalProjection': new OpenLayers.Projection("EPSG:900913"),
                 'externalProjection': new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID)
             });
             var shape_wkt = wkt_maker.write(shape);

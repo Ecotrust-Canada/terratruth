@@ -10,10 +10,10 @@ AMNDSS.FindLocation = function(){
                     if (!point) {
                         alert("Address not found, please try again.");
                     } else {
-                        //var internalProjection = new OpenLayers.Projection("EPSG:4326");
-                        //var externalProjection = new OpenLayers.Projection("EPSG:4326");
-	                    var internalProjection = new OpenLayers.Projection("EPSG:900913");
-	                    var externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
+                        var internalProjection = new OpenLayers.Projection("EPSG:4326");
+                        var externalProjection = new OpenLayers.Projection("EPSG:4326");
+	                    //var internalProjection = new OpenLayers.Projection("EPSG:900913");
+	                    //var externalProjection = new OpenLayers.Projection("EPSG:" + AMNDSS.spatialReferenceID);
                         var lonlat = new OpenLayers.LonLat(point.x, point.y);
                         amndsslayoutinstance.getMap().map_component.map.setCenter(
                             lonlat.transform(externalProjection, internalProjection), 12);
