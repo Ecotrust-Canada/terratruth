@@ -1,8 +1,13 @@
-<IfModule mod_ssl.c>
-<VirtualHost *:443>
+<VirtualHost *:80>
   ServerName onadss.syilx.org
 
-  DocumentRoot /usr/local/apps/terratruth/
+  DocumentRoot /usr/local/apps/terratruth
+
+  <Directory /usr/local/apps/terratruth>
+        Order deny,allow
+        Allow from all
+  </Directory>
+
   FastCGIExternalServer /usr/local/apps/terratruth/mysite.fcgi -host 127.0.0.1:3033
 
   RewriteEngine On
@@ -13,14 +18,14 @@
 
   #### Path Settings ####
 
-  Alias /media-admin /usr/local/apps/terratruth/ENV/django/contrib/admin/media
+  Alias /media-admin /usr/local/apps/terratruth/ENV/lib/python2.7/site-packages/django/contrib/admin/media
 
   <Location /media-admin>
     Order allow,deny
     Allow from all
   </Location>
 
-  Alias /media /usr/local/apps/amndss/media
+  Alias /media /usr/local/apps/terratruth/media
 
   <Location /media>
     Order allow,deny
@@ -30,6 +35,7 @@
   Alias /webmap /var/www/webmap
 
   <Location /webmap>
+    Options Indexes FollowSymLinks
     Order allow,deny
     Allow from all
   </Location>
@@ -42,7 +48,7 @@
     Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
     Order allow,deny
     Allow from all
-    SSLOptions +StdEnvVars
+    #SSLOptions +StdEnvVars
   </Directory>
   
   #Only allow local access to private directory, controlling access
@@ -66,13 +72,13 @@
   
   #### SSL Settings ####
 
-  SSLEngine on
+  #SSLEngine on
 
-  SSLCertificateFile    /etc/ssl/certs/SSLCert.pem
-  SSLCertificateKeyFile /etc/ssl/certs/SSLCert.key
+  #SSLCertificateFile    /etc/ssl/certs/SSLCert.pem
+  #SSLCertificateKeyFile /etc/ssl/certs/SSLCert.key
 
   <FilesMatch "\.(cgi|shtml|phtml|php)$">
-	SSLOptions +StdEnvVars
+	#SSLOptions +StdEnvVars
   </FilesMatch>
 
   BrowserMatch ".*MSIE.*" \
@@ -80,12 +86,11 @@
 	downgrade-1.0 force-response-1.0
 
 </VirtualHost>
-</IfModule>
 
 #### Setup port 80 (http) to simply forward terratruth requests on to 443 (https)
-<VirtualHost *:80>
-  ServerName terratruth.example.com
-  DocumentRoot /var/www/terratruth.example.com
+<VirtualHost *:8000>
+  ServerName onadss.syilx.org
+  DocumentRoot /usr/local/apps/terratruth
 
   <Location "/">
     #Force django requests through SSL                                                              

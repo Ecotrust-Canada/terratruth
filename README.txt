@@ -32,6 +32,10 @@ INSTALLATION
 ============
 Contact Lorin Gaertner, lorin@ecotrust.ca, for a document outlining installation instructions.
 
+X) Install jsmin (or add it to the path of the application).
+
+% sudo cp bin/jsmin /usr/bin/
+
 RUNNING
 =======
 

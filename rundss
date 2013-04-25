@@ -1,8 +1,10 @@
 #!/bin/bash
 # run the django fcgi server
 
-sudo ps aux | grep "django_app/manage.py runfcgi" | grep -v grep | awk '{system("sudo kill " $2)}'
-sudo su www-data
+
+echo "run this as ecotrust"
+
+ps aux | grep "django_app/manage.py runfcgi" | grep -v grep | awk '{system("kill " $2)}'
 source /usr/local/apps/terratruth/ENV/bin/activate
 python /usr/local/apps/terratruth/django_app/manage.py runfcgi method=threaded host=127.0.0.1 port=3033
 echo successfully restarted AMNDSS
