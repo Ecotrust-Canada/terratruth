@@ -131,7 +131,8 @@ def add_referral_shape(request):
         if user_groups:
             try:
                 new_referral = simplejson.loads(request.POST['json'])
-                new_poly = GEOSGeometry(new_referral['wkt'])
+                new_poly = fromstr(new_referral['wkt'], srid=3005) #GEOSGeometry(new_referral['wkt'])
+#                new_poly = new_poly.transform(3005, clone=True)
 
                 # make sure the new poly is not a line (which GEOS will allow, but we don't want)
                 if new_poly.area == 0.0:

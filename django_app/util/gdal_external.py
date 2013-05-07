@@ -5,11 +5,14 @@ from django.contrib.gis.gdal import *
 from django.contrib.gis.gdal.libgdal import lgdal
 
 def gdal_get_rsp_files(out_dir, args):
-    ''' This script is run externally to Django because apache crashes if it is imported and run.
+    '''
+        This script is run externally to Django because apache crashes if it is imported and run.
         It communicates with the AMNDSS application via the pickle module. 
-        It is intended only for use with shp_response.py
+        It is intended for use with shp_response.py
 
         Currently setup for use with the GDAL 1.7 binding.
+
+        
     '''
 
     #extract serialized arguments.
