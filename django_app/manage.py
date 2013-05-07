@@ -12,7 +12,7 @@ except ImportError:
 
 import os
 os.environ['GDAL_DATA'] = '/usr/share/gdal/1.7'
-os.environ['GDAL_LIBRARY_PATH'] = '/usr/lib/libgdal1.7.0.so'
+#os.environ['GDAL_LIBRARY_PATH'] = '/usr/lib/libgdal1.7.0.so'
 
 if __name__ == "__main__":
     execute_manager(settings)

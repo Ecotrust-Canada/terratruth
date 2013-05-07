@@ -26,13 +26,9 @@ logging.basicConfig(
 
 def ShpResponse(query_set, geom_field=None, mimetype='application/zip'):
 
-    tmp = tempfile.NamedTemporaryFile(suffix='.shp', mode = 'w')
-    path = os.path.dirname(tmp.name)
-    name = tmp.name.split('/')[-1]
-    fullname = tmp.name
-    basename = fullname.strip('.shp')
-    tmp.close()
-
+    tmp_dir = tempfile.mkdtemp()
+    basename = os.path.join(tmp_dir, 'shape')
+ 
     fields = query_set.model._meta.fields
     geo_fields = [f for f in fields if isinstance(f, GeometryField)]
     other_field_names = [f.name for f in fields if not isinstance(f, GeometryField)]
@@ -57,7 +53,6 @@ def ShpResponse(query_set, geom_field=None, mimetype='application/zip'):
     
     # Update: using fcgi so the following is no longer necessary.
     # ----------------------------------------------------
-    '''
     # Calls to the GDAL Python binding crash the Apache web server, but they do not crash
     # the native Python interpreter when run stand-alone. This problem may be caused by
     # an incompatibility between the current version Apache's python sub-interpreter mod_wsgi and GDAL
@@ -65,22 +60,21 @@ def ShpResponse(query_set, geom_field=None, mimetype='application/zip'):
     # The (non-ideal) solution below invokes an external python interpreter, running a script which handles calls to GDAL.
     # Arguments / state are passed to this script via the pickle module. [cvo]
     
-    pickle.dump([geo_field.srid, other_field_names, items],open(fullname+'.pickle','w'))
+    pickle.dump([geo_field.srid, other_field_names, items],open(os.path.join(tmp_dir,'shape.pickle'),'w'))
     gdal_script = os.path.join(settings.BASE_DIR, settings.BASE_APP, 'util/gdal_external.py')
-    shape_cmd = "python %s %s"%(gdal_script,fullname)
+    shape_cmd = "python %s %s"%(gdal_script,tmp_dir)
     pin, pout, perr = os.popen3(shape_cmd)
     pout = pout.read()
     perr = perr.read()
     
-    If the shape script fails propagate the error upwards.
+    #If the shape script fails propagate the error upwards.
     if perr:
         raise Exception('gdal script error: %s'%perr)
-    '''
     
     #logging.debug("geo_field.srid = "+str(geo_field.srid))
 
-    gdal_external.gdal_get_rsp_files(fullname, [geo_field.srid, other_field_names, items])
-     
+    #gdal_external.gdal_get_rsp_files(fullname, [geo_field.srid, other_field_names, items])
+
     buffer = StringIO()
     zip = zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED)
     files = ['shp','shx','prj','dbf']
