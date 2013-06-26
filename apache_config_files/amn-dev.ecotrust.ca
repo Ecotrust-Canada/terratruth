@@ -4,7 +4,7 @@
 
   #### WSGI Settings (for django) ####
 
-  WSGIScriptAlias / /usr/local/apps/amndss/django_app/wsgi.py
+  WSGIScriptAlias / /usr/local/terratruth/amndss/django_app/wsgi.py
   WSGIDaemonProcess amndss user=www-data group=www-data processes=10 threads=1
   WSGIProcessGroup amndss
 
@@ -17,7 +17,7 @@
     Allow from all
   </Location>
 
-  Alias /media /usr/local/apps/amndss/media
+  Alias /media /usr/local/terratruth/amndss/media
 
   <Location /media>
     Order allow,deny

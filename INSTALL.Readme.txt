@@ -1,0 +1,48 @@
+TERRATRUTH set up instructions
+Last updated May 1 2013
+These instructions are incomplete AND subject to change! But hopefully will help. 
+Terratruth was previously known as the AMN DSS (Aboriginal Mapping Network Decision Support System) so you may see references to amndss. 
+
+Requirements:
+linux server. Instructions assume Ubuntu Server
+git (sudo apt-get install git-core)
+apache2 (sudo apt-get install 
+ - a2en RewriteEngine
+pip
+virtualenv
+postgres
+
+create user ecotrust - no password
+add developers to the group sudo usermod -a -G ecotrust yourusername
+clone the repo from https://code.google.com/p/terratruth/source/checkout
+
+default location for the terratruth folder is /usr/local/apps
+
+Set up location for image files. Default (set in settings.py) is
+/projects/terratruth/rectified_images
+
+Other things outside the repo: 
+ln -s /tmp/user_shape_uploads/ uploads
+
+File Ownership -- owned by ecotrust
+su ecotrust
+
+SET UP virtualenv
+virtualenv ENV
+source ENV/bin/activate
+pip install -r requirements.txt
+
+This will test that django is working:
+python manage.py runserver 
+
+Could not find an easy way to install mapscript inside ENV SO:
+sudo apt-get install python-mapscript
+
+edit usr/share/proj/epsg to add 900913
+
+set up webmap
+var/www/webmap 
+
+copy django_app/local_settings_template.py to local_settings.py and edit -- database settings
+
+set up private map files in mapserver folder

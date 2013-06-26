@@ -44,7 +44,7 @@ BASE_APP_URL = '' #'amndss-django'
 BASE_APP = 'django_app'
 TEMP_DIR = '/tmp/'
 
-IMAGE_DIR = '/projects/amndss/rectified_images/'
+IMAGE_DIR = '/projects/terratruth/rectified_images/'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
