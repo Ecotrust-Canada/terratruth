@@ -274,7 +274,8 @@ class ReferralImage(Model):
         rect_path_3005 = settings.IMAGE_DIR + self.get_rect_filename(settings.SPATIAL_REFERENCE_ID);
         import os        
         command = settings.GDAL_PATH+"/gdal_translate "+orig_path+' '+interm_path
-        execute(command)
+        if subprocess.call(command):
+            raise Exception ("gdal_translate failed")
 
         #Add control points to tif
         command = settings.GDAL_PATH+'/gdal_translate -a_srs "EPSG:4326"'

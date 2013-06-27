@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     (r'^jsfull/', jsfull),
     (r'^print/', 'amndssprint.views.index'),
     (r'^getfonts/', wms_layers.views.get_fonts),
+    (r'^tmp/(.*)$','django.views.static.serve',{'document_root': "/tmp/", 'show_indexes': True}),   
 )
 
 urlpatterns += patterns('',
@@ -36,8 +37,7 @@ urlpatterns += patterns('',
 
 if settings.DEBUG is True:
     urlpatterns += patterns('',
-        (r'^media/(.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),    
-        (r'^tmp/(.*)$','django.views.static.serve',{'document_root': "/tmp/", 'show_indexes': True}),    
+        (r'^media/(.*)$','django.views.static.serve',{'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),     
         #GIS tools
         (r'^webmap/(.*)$','django.views.static.serve',{'document_root': settings.WEBMAP_ROOT, 'show_indexes': True})
     )

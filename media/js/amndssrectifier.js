@@ -16,7 +16,9 @@ AMNDSS.RectifyMap = function (mapdiv, imagediv) {
     var latlon_lat = group.lat_coord;
     var latlon_zoom = group.mapzoom;
 
+    //MouseDefaults is deprecated in 2.4 and will be removed by 3.0
     var mouseDefaults = new OpenLayers.Control.MouseDefaults();
+    //var mouseDefaults = new OpenLayers.Control.Navigation();
     mouseDefaults.defaultDblClick = function () {
         return true;
     };
@@ -88,7 +90,9 @@ Ext.extend(AMNDSS.RectifyMap, Ext.util.Observable, {
     //Create map and display user image
     addImage2Rectify: function (data) {
         //Get rid of default double click handler
+        //MouseDefaults is deprecated in 2.4 and will be removed by 3.0
         var mouseDefaults = new OpenLayers.Control.MouseDefaults();
+        //var mouseDefaults = new OpenLayers.Control.Navigation();
         mouseDefaults.defaultDblClick = function () {
             return true;
         };

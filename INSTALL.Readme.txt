@@ -11,6 +11,8 @@ apache2 (sudo apt-get install
 pip
 virtualenv
 postgres
+libgdal1-1.7.0
+gdal-bin 
 
 create user ecotrust - no password
 add developers to the group sudo usermod -a -G ecotrust yourusername

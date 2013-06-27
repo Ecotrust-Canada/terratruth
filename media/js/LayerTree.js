@@ -530,7 +530,7 @@ Ext.extend(mapfish.widgets.LayerTree, Ext.tree.TreePanel, {
                         if (layer.getVisibility()) {
 
                             // don't show icon for the base layer
-                            if (!layer.hide_in_legend) {
+                            if (!layer.hide_in_legend && (layer.hide_in_legend !== undefined)) {
                                 // add the icon to the layer control when the layer is turned on
                                 iconUrl = this.layerNameToUrl[layerName];
                                 if (iconUrl.indexOf("'") > -1) {
