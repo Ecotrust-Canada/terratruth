@@ -84,11 +84,12 @@ class AmnMap(object):
                     #wmsLayer.setProjection("init="+layer['params']['SRS'])
                     # By default take the first 'list' of any values
                     wmsLayer.metadata.set("wms_name", subLayer)
+                    wmsLayer.metadata.set("wms_exceptions_format", "application/vnd.ogc.se_xml")
                     wmsLayer.metadata.set("wms_format", "image/png") #layer['params']['FORMAT'])
                     wmsLayer.metadata.set("wms_srs", layer['params']['SRS'])
                     wmsLayer.metadata.set("wms_server_version", layer['params']['VERSION'])
                     outputMap.insertLayer(wmsLayer)
-                
+                                    
         vectorLayers = self.fields['oldata']['vectorLayers']
         if len(vectorLayers) > 0:
             dataString = "poly from (select id, poly from referrals_referralshape where "
