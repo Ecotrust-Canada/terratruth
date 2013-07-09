@@ -12,7 +12,7 @@ $(document).ready(function() {
     var html = '<br/><div style="float:left;">COLOR:<br/><form><input type="text" id="COLOR" name="COLOR" value="' + style.COLOR + '" /></form><div id="COLORPicker"></div></div>';
     html += '<div style="float:left; margin-left:20px;">OUTLINECOLOR:<br/><form><input type="text" id="OUTLINECOLOR" name="OUTLINECOLOR" value="' + style.OUTLINECOLOR + '" /></form><div id="OUTLINECOLORPicker"></div></div>';
     html += '<div style="float:left; margin-left:20px;">WIDTH:<br/><select class="styleinput" id="WIDTH"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></div>';
-    html += '<div style="float:left; margin-left:20px;"><ul><li>choose a color from the color chooser. color text will updated accordingly.</li><li>remove the color text to have no color.</li></ul></div>';
+    html += '<div style="float:left; margin-left:20px;"><ul><li>choose a color from the color chooser. color text will updated accordingly.</li><li>remove the color text to have no color.</li><li>width is also used for point size</li></ul></div>';
     
     $('textarea#id_style').after(html);
     

@@ -125,7 +125,7 @@ class Private(Model):
     format = ForeignKey(wms_format,default=1, blank=True, null=True)
     show_legend = BooleanField(default=True)
     tag = CharField(max_length=255, help_text='comma delimited, flags used internally.', blank=True, null=True)
-    user_file = FileField(upload_to=user_shape_location,null=True, blank=True)
+    user_file = FileField(upload_to=user_shape_location,null=True, blank=True, help_text="a zip file containing GIS shapefile to upload")
     user_file_type = CharField(max_length=10, blank=True, null=True)
     label_field_name = CharField(max_length=100, blank=True, null=True)
     label_style = TextField(default='{"COLOR":"#ffffff","SIZE":"9","FONT":"calibri"}', blank=True, null=True)
@@ -292,6 +292,18 @@ def generate_map_file(new_wms_layer=None):
                   FORCE FALSE
                 END'''
 
+        STYLEstr = '''
+                STYLE''' + COLORstr + OUTLINECOLORstr 
+        if wms.user_file_type == 'POINT':
+            STYLEstr = STYLEstr + '''
+                    SYMBOL "square"
+                    SIZE ''' + style['WIDTH']
+        else:
+            STYLEstr = STYLEstr + '''
+                    WIDTH ''' + style['WIDTH']
+        STYLEstr = STYLEstr + '''
+                END'''
+
         mapfile.write('''
         LAYER
             NAME "''' + wms.name + '''"
@@ -311,10 +323,7 @@ def generate_map_file(new_wms_layer=None):
             TRANSPARENCY 70
             TEMPLATE foo''' + LABELstr + '''
             CLASS
-                NAME "''' + wms.name + '''"
-                STYLE''' + COLORstr + OUTLINECOLORstr + '''
-                  WIDTH ''' + style['WIDTH'] + '''
-                END''' + LABELstylestr + '''
+                NAME "''' + wms.name + '"' +  STYLEstr + LABELstylestr + '''
             END
         END
         ''')

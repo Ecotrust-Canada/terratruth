@@ -13,6 +13,10 @@ virtualenv
 postgres
 libgdal1-1.7.0
 gdal-bin 
+# for jpeg support in PIL library
+python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
+
+
 
 create user ecotrust - no password
 add developers to the group sudo usermod -a -G ecotrust yourusername
@@ -48,3 +52,5 @@ var/www/webmap
 copy django_app/local_settings_template.py to local_settings.py and edit -- database settings
 
 set up private map files in mapserver folder
+the file private_map_files/user_shapes.map has to be writable by the server
+need to have a writable folder media/uploads
