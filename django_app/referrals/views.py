@@ -483,7 +483,7 @@ def image_add(request):
     form = ImageAddForm(request.POST, request.FILES)
     if form.is_valid():   
         form.save(request)    
-    return HttpResponse('', mimetype='text/javascript')
+    return HttpResponse('{success:true}', mimetype='text/javascript')
 
 '''
 Image web service - Returns latest ReferralImage info as JSON including information 

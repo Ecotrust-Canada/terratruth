@@ -13,6 +13,7 @@ import logging
 logging.basicConfig(
     level = logging.DEBUG,
     format = '%(asctime)s %(levelname)s %(message)s',
+    filename='/tmp/lorinlog.log'
 )
 
 @login_required

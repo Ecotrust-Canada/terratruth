@@ -143,7 +143,10 @@ class AmnMap(object):
         h = 0
         w = 0
         for url in self.fields['legendimages']:
-            file = urllib.urlopen(url)
+            try:
+                file = urllib.urlopen(url)
+            except:
+                raise Exception("Failed to load %s" % url)
             item = Image.open(cStringIO.StringIO(file.read()))
             if item.size[0] + h < self.H:
                 legend.paste(item,(0,h))

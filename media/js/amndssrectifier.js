@@ -679,6 +679,7 @@ Ext.extend(AMNDSS.Rectifier, Ext.util.Observable, {
 
     doImage2RectifyUpload: function () {
         //TODO: xhr request returns no response text...
+         console.trace();
         this.rect_upload_form.getForm().submit({
             url: '../referral/image/add/',
             method: 'POST',

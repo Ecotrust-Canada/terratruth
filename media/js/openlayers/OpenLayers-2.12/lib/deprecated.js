@@ -3358,13 +3358,13 @@ OpenLayers.Layer.VirtualEarth = OpenLayers.Class(
     factory = new GearsFactory();
   } else {
     // IE
-    try {
-      factory = new ActiveXObject('Gears.Factory');
+    //try {
+      //factory = new ActiveXObject('Gears.Factory');
       // privateSetGlobalObject is only required and supported on WinCE.
-      if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
-        factory.privateSetGlobalObject(this);
-      }
-    } catch (e) {
+      //if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
+      //  factory.privateSetGlobalObject(this);
+      //}
+    //} catch (e) {
       // Safari
       if ((typeof navigator.mimeTypes != 'undefined')
            && navigator.mimeTypes["application/x-googlegears"]) {
@@ -3375,7 +3375,7 @@ OpenLayers.Layer.VirtualEarth = OpenLayers.Class(
         factory.type = "application/x-googlegears";
         document.documentElement.appendChild(factory);
       }
-    }
+    //}
   }
 
   // *Do not* define any objects if Gears is not installed. This mimics the
